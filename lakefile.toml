@@ -1,0 +1,22 @@
+name = "palomar_qseries_row_factorization"
+version = "0.1.0"
+defaultTargets = ["PalomarQseriesRowFactorization", "Challenge", "Solution"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.30.0"
+
+[[lean_lib]]
+name = "PalomarQseriesRowFactorization"
+
+[[lean_lib]]
+name = "QseriesFormalization"
+
+[[lean_lib]]
+name = "Challenge"
+roots = ["Challenge"]
+
+[[lean_lib]]
+name = "Solution"
+roots = ["Solution"]

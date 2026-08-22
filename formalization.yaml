@@ -1,0 +1,117 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Finite row factorization for a shifted indefinite theta kernel"
+  description: >-
+    A Lean 4 verification of the finite coefficientwise row factorization,
+    its identification with the Q(sqrt(5)) norm-theta coefficient at every
+    even level, and vanishing at every odd level.
+  authors:
+    - "Xiang Huang"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Xiang Huang"
+
+classification:
+  arxiv: [math.NT]
+  msc2020: [11F27, 33D15]
+
+sources:
+  - title: "A shifted indefinite theta completion over Q(sqrt(5)): an asymmetric boundary derivative and a row-model factorization"
+    authors:
+      - "Xiang Huang"
+    type: paper
+    relationship: formalizes
+    note: >-
+      The registered declarations formalize the finite row-model factorization
+      and its even/odd coefficient consequences. The paper's analytic results
+      and Jacobi-product evaluation are outside the registered Lean scope.
+  - title: "Ramanujan's cubic continued fraction and an analog of his most beautiful identity"
+    authors:
+      - "Hei-Chi Chan"
+    id: "doi:10.1142/S1793042110003150"
+    type: paper
+    location: "https://doi.org/10.1142/S1793042110003150"
+    relationship: builds-on
+    note: >-
+      Chan's tenth-order dissection motivates the shifted row model. No
+      source-faithfulness theorem connecting the registered model to an older
+      project expression is included.
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Comparator checks three declarations: the finite convolution identity for
+    MKcoeff, the identification coneDiffH(2N)=BCoeff(N) for every natural N,
+    and vanishing of coneDiffH(m) whenever 2 does not divide the integer m.
+    Every coefficient is defined by an explicit finite Finset sum.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+
+automation:
+  methods:
+    - method: agent
+      models: ["Claude", "ChatGPT", "OpenAI Codex"]
+      framework: "Lean 4 with remote build and multi-model review"
+      tool_setup: >-
+        AI-assisted proof development, statement comparison, dependency
+        auditing, clean Linux builds, and axiom inspection under human
+        direction.
+      cost:
+        wall_time: "not reconstructed"
+        spend_usd: "subscription-based"
+        hardware: "Mac mini orchestration and uisai2 Linux verification"
+      prompting_notes: >-
+        Agents proposed and reviewed proof steps; every retained declaration
+        is checked by Lean and the advertised theorem surface is axiom-audited.
+  spend_usd: "subscription-based"
+  notes: >-
+    The submission record retains only claims supported by the pinned public
+    source and Comparator result.
+
+fidelity:
+  divergences: >-
+    The formalization proves the finite coefficient algebra underlying the
+    manuscript's row model. It does not formalize the Jacobi triple product,
+    the halved-variable Laurent-series identity, the Zwegers completion,
+    modular transformation formulas, the mixed theta derivative, or any
+    theorem identifying this model with an older Chan-project source object.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "OpenAI Codex"
+  notes: >-
+    The extracted closure, manuscripts, and public Challenge/Solution surface
+    are undergoing exact-commit independent review before publication.
+
+alignment:
+  namespace: "PalomarQseriesRowFactorization"
+  statements:
+    - source: "Paper, Theorem: Row-model factorization"
+      lean: "PalomarQseriesRowFactorization.mk_factorization"
+      module: "Challenge"
+      status: proved
+      note: >-
+        States the exact finite convolution, including the lower coefficient
+        bound -2 and all integer coercions.
+    - source: "Paper, finite even-level cone identification"
+      lean: "PalomarQseriesRowFactorization.coneDiffH_two_mul"
+      module: "Challenge"
+      status: proved
+      note: >-
+        Identifies the row-level cone difference with BCoeff for every natural
+        coefficient index.
+    - source: "Paper, odd-level vanishing"
+      lean: "PalomarQseriesRowFactorization.coneDiffH_odd"
+      module: "Challenge"
+      status: proved
+      note: >-
+        Proves vanishing for every integer level not divisible by two.
+
+acknowledgements: >-
+  Mathlib and Lean provide the formal foundation. Chan's q-series identity
+  supplies the motivating dissection context.

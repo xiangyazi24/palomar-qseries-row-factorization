@@ -1,0 +1,1151 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[
+  pdftitle={A shifted indefinite theta completion over Q(sqrt(5)): an asymmetric boundary derivative and a row-model factorization},
+  pdfauthor={Xiang Huang}
+]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\N}{N}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\OK}{\mathcal{O}_K}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ph}{\varphi}
+\newcommand{\Acone}{\mathcal{A}}
+\newcommand{\Dcone}{\mathcal{D}}
+\newcommand{\MK}{\mathrm{MK}}
+\newcommand{\Splus}{\mathcal{S}^{+}}
+\newcommand{\Sminus}{\mathcal{S}^{-}}
+
+\title[A shifted indefinite theta completion over $\QQ(\sqrt5)$]
+{A shifted indefinite theta completion over $\QQ(\sqrt5)$:\\
+an asymmetric boundary derivative and a row-model factorization}
+\author{Xiang Huang}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+We study a norm-supported cone series $B(q)$ over $\QQ(\sqrt5)$ and
+two structures attached to it.  First, a coefficientwise row model
+motivated by the even-row missing kernel in Chan's $\Theta_{10}$
+dissection factors as $-q^{-1}j(q;q^5)^2B(q)$.  Second, the normalized
+series $F(\tau)=q^{1/10}B(q)$ is the holomorphic sign kernel of an
+explicit rank-two indefinite theta datum in the sense of Zwegers.  We
+write the exact characteristic vectors and the resulting componentwise
+weight-one transformation formulas.  One boundary correction vanishes by
+an odd-theta pairing.  For the other boundary we give an index-four
+orthogonal decomposition and compute
+$\partial_{\bar\tau}\widehat F$ as a nonzero sum of a holomorphic
+weight-$\tfrac12$ theta factor times an antiholomorphic unary
+weight-$\tfrac32$ theta factor.  The corresponding $\xi_1$ image is
+nonholomorphic, so this natural completion is not harmonic and does
+not by itself establish ordinary weight-one mock modularity in the
+harmonic-Maass sense.  The result is instead an explicit shifted indefinite theta
+completion with a mixed theta derivative.  The arithmetic theory of
+$B$ is independent and belongs to a separate companion paper.
+\end{abstract}
+
+\maketitle
+
+%----------------------------------------------------------------------
+\section{Introduction}\label{sec:intro}
+%----------------------------------------------------------------------
+
+The identities of Andrews, Dyson, and Hickerson and of Cohen connect
+$q$-series, real quadratic fields, and Maass waveforms
+\cite{jADH88,jCo88}.  Their coefficients admit an ideal-theoretic
+interpretation and display the multiplicativity expected from a Hecke
+character.  Related real-quadratic constructions were developed in
+\cite{jCFLZ04,jBrKa11,jLoOs15}.  The series studied here arises from a
+different source: Chan's dissection of the tenth-order theta function
+$\Theta_{10}$ \cite{jCh10}.
+
+The companion arithmetic paper \cite{companion} studies the independently
+defined cone series
+\[
+  B(q)=\sum_{N\geq 0} B_N q^N
+\]
+and proves the finite lattice, norm, and coefficient identities needed
+to define it.  This paper studies the analytic nature of that already
+defined series.  Its main point is that the natural completion has one
+vanishing boundary correction and one surviving boundary correction.
+The asymmetry is visible both in the unequal norms
+$-5$ and $-20$ of the two negative vectors and in the parity of the
+transverse theta sums.
+
+Our principal analytic result is the following.  The theta components
+$\theta_j$ and $g_j$ are defined explicitly in
+Section~\ref{sec:shadow}.
+
+\begin{theorem}[Exact completion and differential image]\label{thm:main}
+Let $F(\tau):=q^{1/10}B(q)$, where $q=e^{2\pi i\tau}$.  For
+\[
+  A=\begin{pmatrix}1&0\\0&-5\end{pmatrix},\qquad
+  a=\left(\frac12,\frac1{10}\right),\qquad
+  b=\left(\frac12,-\frac1{10}\right),
+\]
+and the negative-vector pair $c_2=(-5,3)$, $c_1=(0,1)$, let
+$\vartheta_{a,b}^{c_2,c_1}$ denote Zwegers' completed indefinite theta
+function for $Q_0(v)=\tfrac12v^tAv$.  Then
+\[
+  \widehat F(\tau)
+  :=\frac12e^{-3\pi i/5}\vartheta_{a,b}^{c_2,c_1}(\tau)
+\]
+has holomorphic sign part $F$ and satisfies
+\[
+  \widehat F(\tau+1)=e^{\pi i/5}\widehat F(\tau),
+\]
+\[
+  \widehat F(-1/\tau)
+  =\frac{\tau}{2\sqrt5}\sum_{m=0}^{4}
+    \vartheta_{\,b+(0,m/5),\,-a}^{c_2,c_1}(\tau).
+\]
+Writing $Y=\operatorname{Im}(\tau)$, its differential images are
+\[
+  \frac{\partial\widehat F}{\partial\overline\tau}
+  =-\frac{i}{4\sqrt{10Y}}
+    \sum_{j=0}^{3}(-1)^j\theta_j(\tau)\overline{g_j(\tau)},
+\]
+and, for $\xi_1(f)=2iY\,\overline{\partial f/\partial\overline\tau}$,
+\[
+  \xi_1(\widehat F)
+  =-\frac{\sqrt Y}{2\sqrt{10}}
+    \sum_{j=0}^{3}(-1)^j\overline{\theta_j(\tau)}g_j(\tau).
+\]
+These expressions are nonzero and the $\xi_1$ image is not
+holomorphic.  Hence $\widehat F$ is a component of a finite-dimensional
+vector-valued weight-one real-analytic modular completion, but is not a
+weight-one harmonic Maass form.
+\end{theorem}
+
+Here
+\[
+  j(z;q):=(z;q)_\infty(q/z;q)_\infty(q;q)_\infty
+\]
+is Jacobi's product.  We do not attach a stronger mock-modular label
+to the residual product here: doing so requires carrying the exact
+monomial normalization and the vector-valued representation through
+the Jacobi factor.  The formal product identity is stated independently
+in Theorem~\ref{thm:mk-factorization}.
+
+\subsection*{Relation to earlier work}
+Zwegers' thesis supplies the general indefinite-theta completion and
+its characteristic transformation formulas \cite{oZw02}.  His later
+paper on mock Maass theta functions places ADH- and Cohen-type sums in
+a broader real-analytic setting \cite{jZw12}.  The contribution here is
+the exact specialization for this shifted $\QQ(\sqrt5)$ cone: the
+characteristics, the asymmetric boundary decomposition, and the mixed
+theta derivative.  Hickerson--Mortenson's treatment of Hecke-type
+double sums gives complementary $q$-series background
+\cite{jHiMo14}.  We do not infer a harmonic-Maass or ordinary mock
+classification merely from the existence of a Zwegers completion.
+
+\subsection*{Organization}
+Section~\ref{sec:foundations} recalls only the definitions needed from
+the companion paper.  Section~\ref{sec:arithmetic-recall} gives a brief
+arithmetic separation statement.  Section~\ref{sec:slab} proves the
+slab identity, Section~\ref{sec:pell} gives the corrected Pell
+coordinates and sign calculation, and Section~\ref{sec:shadow}
+computes the completion and mixed boundary derivative.  Section~\ref{sec:comparison}
+compares the construction with the Maass cases, and
+Section~\ref{sec:status} records computation, formalization scope, and
+open questions.
+
+%----------------------------------------------------------------------
+\section{The residual series recalled from the companion paper}
+\label{sec:foundations}
+%----------------------------------------------------------------------
+
+We keep the common foundation short and refer to \cite{companion} for
+the lattice bijection, norm interpretation, unit action, prime
+classification, and their proofs.
+
+\begin{definition}\label{def:E}
+For $k,r\in\ZZ$, put
+\[
+  H(k,r):=4k^2+2k+r^2+(6k+1)r,
+  \qquad E(k,r):=\frac{H(k,r)}2.
+\]
+The integer $H(k,r)$ is even.  Define the two quadrant cones
+\[
+  \Acone:=\{(k,r)\in\ZZ^2:k\geq0,\ r\geq0\},
+  \qquad
+  \Dcone:=\{(k,r)\in\ZZ^2:k<0,\ r<0\}.
+\]
+On these two cones $E(k,r)\geq0$.
+\end{definition}
+
+\begin{definition}\label{def:B}
+The coefficient and generating series are
+\[
+  B_N:=
+  \sum_{\substack{(k,r)\in\Dcone\\E(k,r)=N}}(-1)^r
+  -
+  \sum_{\substack{(k,r)\in\Acone\\E(k,r)=N}}(-1)^r,
+  \qquad
+  B(q):=\sum_{N\geq0}B_Nq^N.
+\]
+Each coefficient is a finite signed sum.
+\end{definition}
+
+The companion paper proves that the map
+\[
+  \beta(k,r)=(r-2k)+(4k+3r+1)\ph
+\]
+is a bijection from $\ZZ^2$ to a translate of an index-$10$ sublattice
+of $\ZZ[\ph]$ and that
+\[
+  -\N(\beta(k,r))=10E(k,r)+1.
+\]
+Section~\ref{sec:mk-factorization} defines a coefficientwise row model
+motivated by an even-row missing-kernel expression in the $\Theta_{10}$
+project and proves that the model factors exactly as
+\[
+  \mathcal R(q)=-q^{-1}j(q;q^5)^2B(q)
+\]
+in the $E$-level exponent chart
+(Theorem~\ref{thm:mk-factorization}; an earlier project record
+displayed this identity with a mixed normalization --- see
+Remark~\ref{rem:normalization}).  The current formal theorem is about
+the row model defined here; an identification with the older source
+object \texttt{rhoEvenSourceOldRow\_missing} would require a separate
+source-to-model theorem and is not claimed.  The finite algebraic
+results above are inputs here, not reproved in this paper.
+
+\begin{remark}[Hickerson--Mortenson form]
+In the notation of \cite{jHiMo14}, $B$ coincides with the
+Hecke-type double sum
+\[
+  -f_{1,3,4}(X,\,-X^3,\,X);
+\]
+this follows exactly by termwise comparison of the two cones, signs,
+and exponents.  The coefficient implementation was additionally
+checked through $N=200$.
+\end{remark}
+
+%----------------------------------------------------------------------
+\section{Arithmetic separation in five sentences}
+\label{sec:arithmetic-recall}
+%----------------------------------------------------------------------
+
+The companion paper identifies the defining translate in
+$\ZZ[\ph]$ and proves the norm formula above \cite{companion}.
+The fundamental totally positive unit does not stabilize that translate
+at one step, so the element sum does not descend by the classical ADH
+route to a single ideal character.
+The resulting coefficient sequence is nonmultiplicative, with
+$B_{34}=3$ but $B_1B_3=-2$.
+This witness rules out the classical one-dimensional Hecke-character
+explanation; it does not rule out every automorphic interpretation.
+The prime-value classification and all sector-residue questions belong
+to the companion paper and are not duplicated here \cite{companion}.
+
+%----------------------------------------------------------------------
+\section{The involution and the exact slab identity}\label{sec:slab}
+%----------------------------------------------------------------------
+
+The analytic form of $B$ becomes visible after a sign-reversing
+involution removes the paired interior.
+
+\begin{definition}\label{def:sigma}
+For fixed $k\in\ZZ$, define
+\[
+  \sigma_k(r):=-r-6k-1.
+\]
+Define the two slabs
+\[
+  \Splus:=\{(k,r)\in\ZZ^2:k\geq0,\ r\leq-6k-1\},
+\]
+\[
+  \Sminus:=\{(k,r)\in\ZZ^2:k\leq-1,\ r\geq-6k\}.
+\]
+\end{definition}
+
+\begin{lemma}[The involution]\label{lem:sigma}
+For every $k,r\in\ZZ$,
+\[
+  \sigma_k(\sigma_k(r))=r,
+  \qquad
+  E(k,\sigma_k(r))=E(k,r),
+  \qquad
+  (-1)^{\sigma_k(r)}=-(-1)^r.
+\]
+The map $\sigma_k$ has no fixed point in $\ZZ$.
+\end{lemma}
+
+\begin{proof}
+Write $C=6k+1$.  Since
+\[
+  H(k,r)=2k(2k+1)+r(r+C),
+\]
+we have
+\[
+  (-C-r)(-r)=r(r+C),
+\]
+which proves preservation of $H$ and hence of $E$.  The number $C$ is
+odd, so $(-1)^{-C-r}=-(-1)^r$.  A fixed point would give
+$2r=-C$, impossible because the right side is odd.
+\end{proof}
+
+\begin{theorem}[Slab identity]\label{thm:slab}
+Coefficientwise as a formal power series,
+\[
+  B(q)=
+  \sum_{(k,r)\in\Splus}(-1)^r q^{E(k,r)}
+  -
+  \sum_{(k,r)\in\Sminus}(-1)^r q^{E(k,r)}.
+\]
+\end{theorem}
+
+\begin{proof}
+For $(k,r)\in\Acone$, the point
+$(k,\sigma_k(r))$ lies in $\Splus$, and this assignment is a
+bijection from $\Acone$ to $\Splus$.  Lemma~\ref{lem:sigma} gives
+\[
+  -(-1)^r q^{E(k,r)}
+  =(-1)^{\sigma_k(r)}q^{E(k,\sigma_k(r))}.
+\]
+For $(k,r)\in\Dcone$, the point
+$(k,\sigma_k(r))$ lies in $\Sminus$, and the same map is a bijection
+from $\Dcone$ to $\Sminus$.  In this case
+\[
+  (+1)(-1)^r q^{E(k,r)}
+  =-(-1)^{\sigma_k(r)}q^{E(k,\sigma_k(r))}.
+\]
+Adding the two identities proves the result coefficientwise.  No
+analytic rearrangement is used.
+\end{proof}
+
+\section{A row-model kernel and its exact factorization}
+\label{sec:mk-factorization}
+
+Throughout, all series are formal Laurent series over $\ZZ$: a series
+is \emph{admissible} if its exponents are bounded below and each
+coefficient is a finite integer sum.  Recall from
+Definition~\ref{def:E} the quadratics
+\[
+  H(k,r)=4k^2+2k+r^2+(6k+1)r,\qquad E(k,r)=\tfrac12 H(k,r),
+\]
+the cones $\Acone=\{k\ge0,\ r\ge0\}$, $\Dcone=\{k<0,\ r<0\}$, the
+coefficients $B_N$ of Definition~\ref{def:B}, and the involution
+$\sigma_k(r)=-r-6k-1$ of Lemma~\ref{lem:sigma}.  Set further
+\[
+  Q_{\mathrm{out}}(u,v):=5u^2-3u+5v^2-7v .
+\]
+Both $Q_{\mathrm{out}}$ and $H$ take only even values, and
+$Q_{\mathrm{out}}(u,v)\ge-2$ for all $u,v\in\ZZ$.
+
+\subsection{The row-model kernel}
+
+Motivated by the even-row expression in the $\Theta_{10}$
+formalization, consider the four-fold row model with weight
+$(-1)^{u+v+r}$, exponent
+$Q_{\mathrm{out}}(u,v)+H(k,r)$ (in the dissection chart the exponent
+carries an overall factor $9$, which we normalize away), and $(k,r)$
+restricted to the two mixed quadrants, with a relative sign:
+\[
+  R_k:=\begin{cases}\{r\le-1\},&k\ge0,\\[2pt] \{r\ge0\},&k\le-1,\end{cases}
+  \qquad
+  \varepsilon_k:=\begin{cases}+1,&k\ge0,\\[2pt] -1,&k\le-1.\end{cases}
+\]
+
+The four-fold sum must be grouped correctly to be meaningful.  For
+fixed $H$-value $m$ the mixed quadrants may contain \emph{infinitely
+many} lattice points: the value $m=-6$, for instance, is attained on
+$\{k\ge0,\ r\le-1\}$ at
+\[
+  (1,-3),\ (1,-4),\ (3,-3),\ (3,-16),\ (31,-24),\ (31,-163),\ \dots,
+\]
+an infinite Pell-automorph orbit family; moreover
+$H(k,-3k)=-5k^2-k\to-\infty$, so $H$ is unbounded below there.  Thus
+the naive sum over $\ZZ^2_{u,v}\times(\text{mixed quadrants})$ is not
+absolutely summable coefficientwise.  The computational probe
+\texttt{even\_missing\_kernel\_term} and the Lean declaration
+\texttt{evenMissingKernelTerm} use the same row convention; the older
+Lean source object is \texttt{rhoEvenSourceOldRow\_missing}.  These
+definitions sum \emph{row by row}: for each fixed $k$ the inner
+variable $r$ is resolved exactly.  We adopt the same convention.
+
+\begin{definition}[Row-model kernel, row convention]\label{def:mk}
+For $k\in\ZZ$ define the row series
+\[
+  \rho_k(x):=\varepsilon_k
+  \sum_{u\in\ZZ}\sum_{v\in\ZZ}\sum_{r\in R_k}
+  (-1)^{u+v+r}\,x^{\,Q_{\mathrm{out}}(u,v)+H(k,r)} ,
+\]
+and the row-model kernel
+\[
+  \MK(x):=\sum_{k\in\ZZ}\rho_k(x).
+\]
+Lemma~\ref{lem:mk-welldef} below shows each $\rho_k$ is admissible and
+the $k$-sum is locally finite, so $\MK$ is a well-defined Laurent
+series with integer coefficients.  All its exponents are even.
+\end{definition}
+
+\subsection{Row transport}
+
+The engine of the proof is a row-local transport identity: on each
+row, the mixed-quadrant sum equals \emph{minus} the corresponding cone
+sum.  It refines the slab identity (Theorem~\ref{thm:slab}) and is
+proved by the same involution.
+
+\begin{lemma}[Row transport]\label{lem:row-transport}
+Fix $k\in\ZZ$ and $m\in\ZZ$.  All four sums below have finitely many
+terms, and
+\[
+  \sum_{\substack{r\le-1\\ H(k,r)=m}}(-1)^r
+  \;=\;-\!\!\sum_{\substack{r\ge0\\ H(k,r)=m}}(-1)^r
+  \qquad(k\ge0),
+\]
+\[
+  \sum_{\substack{r\ge0\\ H(k,r)=m}}(-1)^r
+  \;=\;-\!\!\sum_{\substack{r\le-1\\ H(k,r)=m}}(-1)^r
+  \qquad(k\le-1).
+\]
+Equivalently, as admissible Laurent series in $x$,
+\begin{equation}\label{eq:row-transport}
+  \sum_{r\in R_k}(-1)^r x^{H(k,r)}
+  \;=\;
+  -\sum_{r\in R_k^{c}}(-1)^r x^{H(k,r)},
+\end{equation}
+where $R_k^{c}=\ZZ\setminus R_k$ is the cone side of the row
+($\,r\ge0$ if $k\ge0$; $r\le-1$ if $k\le-1$).
+\end{lemma}
+
+\begin{proof}
+Finiteness: for fixed $k$, $H(k,\cdot)$ is a monic quadratic in $r$,
+so each value is attained at most twice and $H(k,r)\to\infty$ as
+$|r|\to\infty$; in particular each row series is admissible.
+
+Let $k\ge0$ and recall $\sigma_k(r)=-r-6k-1$, which preserves
+$H(k,\cdot)$ and flips $(-1)^r$ (Lemma~\ref{lem:sigma}).  Split
+\[
+  \{r\le-1\}=S\sqcup T,\qquad
+  S:=\{-6k\le r\le-1\},\qquad
+  T:=\{r\le-6k-1\}.
+\]
+The strip $S$ (empty when $k=0$) is $\sigma_k$-stable: $r\in S$ gives
+$\sigma_k(r)=-r-6k-1\in S$.  Since $\sigma_k$ has no fixed points, it
+partitions the finite set $S$ into pairs with equal $H$-value and
+opposite sign, so $S$ contributes $0$ to every coefficient.  Next,
+$r\ge0\iff\sigma_k(r)\le-6k-1$, so $\sigma_k$ is a bijection
+$\{r\ge0\}\to T$ preserving $H$ and flipping the sign; hence the
+$T$-sum equals minus the $\{r\ge0\}$-sum, coefficient by coefficient.
+
+For $k\le-1$ the argument is the mirror image with
+$S=\{0\le r\le-6k-1\}$ (a $\sigma_k$-stable strip of even cardinality
+$-6k$) and $T=\{r\ge-6k\}=\sigma_k(\{r\le-1\})$.
+\end{proof}
+
+\begin{remark}
+Summing \eqref{eq:row-transport} over $k\ge0$ and $k\le-1$ separately
+recovers the $\sigma$-straddling description of the row model and,
+in the $E$-variable, the slab identity of Theorem~\ref{thm:slab}.  The
+row-local form is what is needed here, because only after transport do
+the row supports become bounded below uniformly enough to sum over
+$k$.
+\end{remark}
+
+\subsection{Well-definedness and separation}
+
+\begin{lemma}[Well-definedness]\label{lem:mk-welldef}
+Each $\rho_k$ is admissible, and
+\begin{equation}\label{eq:row-factored}
+  \rho_k(x)=
+  \begin{cases}
+    -\,\Theta_u(x)\,\Theta_v(x)\displaystyle\sum_{r\ge0}(-1)^r x^{H(k,r)},
+    & k\ge0,\\[10pt]
+    \;\;\,\Theta_u(x)\,\Theta_v(x)\displaystyle\sum_{r\le-1}(-1)^r x^{H(k,r)},
+    & k\le-1,
+  \end{cases}
+\end{equation}
+where
+\[
+  \Theta_u(x):=\sum_{u\in\ZZ}(-1)^u x^{5u^2-3u},
+  \qquad
+  \Theta_v(x):=\sum_{v\in\ZZ}(-1)^v x^{5v^2-7v}.
+\]
+The support of $\rho_k$ is contained in
+$[\,4k^2+2k-2,\ \infty)$ for $k\ge0$ and in $[\,4k^2-4k-2,\ \infty)$
+for $k\le-1$.  Consequently, for each exponent $n$ only the rows with
+$4k^2-4|k|-2\le n$ contribute, and $\MK=\sum_k\rho_k$ is a
+well-defined Laurent series.
+\end{lemma}
+
+\begin{proof}
+Fix $k$ and an exponent $n$.  A term of $\rho_k$ contributes to $x^n$
+only if $Q_{\mathrm{out}}(u,v)=a$ and $H(k,r)=m$ with $a+m=n$.  Since
+$a\ge-2$ and $m\ge\min_{r\in R_k}H(k,r)>-\infty$, only finitely many
+splittings $(a,m)$ occur; each $a$ is attained by finitely many
+$(u,v)$ (the quadratic $Q_{\mathrm{out}}$ is positive definite up to
+the bounded linear part: $5u^2-3u\le a+2$ and $5v^2-7v\le a+2$ bound
+$u,v$), and each $m$ by at most two $r\in R_k$.  Hence $\rho_k$ is
+admissible, and by the distributive law for admissible series,
+\[
+  \rho_k(x)
+  =\varepsilon_k\,
+   \Bigl(\sum_u(-1)^u x^{5u^2-3u}\Bigr)
+   \Bigl(\sum_v(-1)^v x^{5v^2-7v}\Bigr)
+   \Bigl(\sum_{r\in R_k}(-1)^r x^{H(k,r)}\Bigr).
+\]
+Here the index set is the full product $\ZZ_u\times\ZZ_v\times R_k$:
+the region constraint involves $(k,r)$ only, the exponent is additively
+separated, and the weight $(-1)^{u+v+r}$ is multiplicatively
+separated — this is the entire content of the separation step.
+Applying Lemma~\ref{lem:row-transport} to the last factor gives
+\eqref{eq:row-factored}.
+
+Supports: for $k\ge0$ the map $r\mapsto H(k,r)$ is increasing on
+$r\ge0$, so $\min_{r\ge0}H(k,r)=H(k,0)=4k^2+2k$; for $k\le-1$ the
+vertex $-(6k+1)/2$ of $H(k,\cdot)$ is positive, so on $r\le-1$ the
+minimum is $H(k,-1)=4k^2-4k$.  Since $\Theta_u\Theta_v$ has exponents
+$\ge-2$, the stated supports follow from \eqref{eq:row-factored}, and
+local finiteness of $\sum_k\rho_k$ is immediate.
+\end{proof}
+
+\begin{proposition}[Separation]\label{prop:separation}
+As Laurent series,
+\[
+  \MK(x)=\Theta_u(x)\,\Theta_v(x)\,\bigl(D(x)-A(x)\bigr)
+        =\Theta_u(x)\,\Theta_v(x)\,B(x^2),
+\]
+where $A(x)=\sum_{(k,r)\in\Acone}(-1)^r x^{H(k,r)}$ and
+$D(x)=\sum_{(k,r)\in\Dcone}(-1)^r x^{H(k,r)}$.
+\end{proposition}
+
+\begin{proof}
+Summing \eqref{eq:row-factored} over $k$: the sums
+$\sum_{k\ge0}\sum_{r\ge0}$ and $\sum_{k\le-1}\sum_{r\le-1}$ are the
+cone series $A(x)$ and $D(x)$, which are admissible with locally
+finite row decompositions (row supports $[4k^2+2k,\infty)$ resp.\
+$[4k^2-4k,\infty)$ as in Lemma~\ref{lem:mk-welldef}), so
+multiplication by the admissible series $\Theta_u\Theta_v$ commutes
+with the $k$-summation coefficientwise:
+\[
+  \MK=\Theta_u\Theta_v\Bigl(\sum_{k\le-1}\ \sum_{r\le-1}(-1)^r x^{H}
+      -\sum_{k\ge0}\ \sum_{r\ge0}(-1)^r x^{H}\Bigr)
+     =\Theta_u\Theta_v\,(D-A).
+\]
+Finally $H(k,r)=2E(k,r)$, so $A(x)=\sum_N A_N x^{2N}$ and
+$D(x)=\sum_N D_N x^{2N}$ with $A_N,D_N$ the cone counts of
+Definition~\ref{def:B}; hence $D(x)-A(x)=B(x^2)$.
+\end{proof}
+
+\subsection{The theta legs}
+
+\begin{lemma}[Jacobi legs]\label{lem:jtp}
+With $j(z;q):=\sum_{n\in\ZZ}(-1)^n q^{\binom n2}z^n
+=(z;q)_\infty(q/z;q)_\infty(q;q)_\infty$,
+\begin{enumerate}
+\item $\Theta_v(x)=-x^{-2}\,\Theta_u(x)$;
+\item $\Theta_u(x)=j(x^2;x^{10})
+      =(x^2;x^{10})_\infty(x^8;x^{10})_\infty(x^{10};x^{10})_\infty$;
+\item $\Theta_u(x)\,\Theta_v(x)=-x^{-2}\,j(x^2;x^{10})^2$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Substitute $u=1-v$ in $\Theta_u$: since
+$5(1-v)^2-3(1-v)=5v^2-7v+2$ and $(-1)^{1-v}=-(-1)^v$, the bilateral
+sum gives $\Theta_u(x)=-x^{2}\Theta_v(x)$.
+(ii) $5u^2-3u=10\binom u2+2u$, so
+$\Theta_u(x)=\sum_u(-1)^u (x^{10})^{\binom u2}(x^{2})^{u}
+=j(x^2;x^{10})$, and the Jacobi triple product evaluates it as
+stated.
+(iii) Multiply (i) and (ii).
+\end{proof}
+
+\subsection{Main theorem}
+
+\begin{theorem}[Row-model factorization]\label{thm:mk-factorization}
+As formal Laurent series,
+\[
+  \MK(x)\;=\;-x^{-2}\,j(x^2;x^{10})^{2}\,B(x^{2}).
+\]
+Equivalently, since every exponent of $\MK$ is even, writing
+$\mathcal R(q):=\sum_{N}\bigl[x^{2N}\bigr]\MK(x)\,q^{N}$ for the
+row model in the halved (that is, $E$-level) variable,
+\[
+  \boxed{\ \mathcal R(q)\;=\;-q^{-1}\,j(q;q^5)^{2}\,B(q)\ }
+\]
+with $j(q;q^5)=(q;q^5)_\infty(q^4;q^5)_\infty(q^5;q^5)_\infty$.
+\end{theorem}
+
+\begin{proof}
+Combine Proposition~\ref{prop:separation} with
+Lemma~\ref{lem:jtp}(iii); then substitute $q=x^2$, using
+$j(x^2;x^{10})=j(q;q^5)\big|_{q=x^2}$.
+\end{proof}
+
+\begin{remark}[Normalization of the previously displayed identity]
+\label{rem:normalization}
+Earlier project records displayed the candidate identity as
+$\mathcal R(q)=-q^{-1}j(q;q^5)^2\,B(q^2)$.  That display mixes the two
+exponent charts: the theta legs are written at $E$-level (base $q^5$)
+while the cone factor is left at $H$-level.  The internally consistent
+forms are the two displayed in
+Theorem~\ref{thm:mk-factorization}; the hybrid form fails already at
+the constant term ($-3$ versus $-2$).  The coefficientwise
+verification (now to $N=2048$) confirms the corrected forms.
+\end{remark}
+
+\begin{remark}[Chart with the factor $9$]
+In the dissection chart of the formal development the exponent is
+$9\bigl(Q_{\mathrm{out}}+H\bigr)=18\,E_{\mathrm{tot}}$.  Thus the
+coefficient of $q^{18N}$ there equals the coefficient of $q^N$ in
+$-q^{-1}j(q;q^5)^2B(q)$, and every exponent not divisible by $18$ has
+coefficient $0$ — in particular the kernel is supported on multiples
+of $9$, consistent with the $9\mid e$ phenomenon observed for the
+per-fiber counterexamples.
+\end{remark}
+
+
+%----------------------------------------------------------------------
+\section{Pell coordinates and the Zwegers cone}\label{sec:pell}
+%----------------------------------------------------------------------
+
+Set
+\[
+  x:=r+3k,\qquad y:=k,
+  \qquad P(X,Y):=X^2-5Y^2.
+\]
+Thus $r=x-3y$ and $k=y$.
+
+\begin{proposition}[Corrected shifted Pell identity]\label{prop:pell-shift}
+With
+\[
+  \mu:=\left(\frac12,\frac1{10}\right),
+  \qquad v_{k,r}:=(x,y)+\mu,
+\]
+we have
+\[
+  H(k,r)=x^2+x-5y^2-y=P(v_{k,r})-\frac15
+\]
+and hence
+\[
+  E(k,r)=\frac12P(v_{k,r})-\frac1{10}.
+\]
+Moreover $(-1)^r=(-1)^{x+y}$.
+\end{proposition}
+
+\begin{proof}
+Substituting $r=x-3y$ and $k=y$ gives
+\[
+  4k^2+6kr+r^2=x^2-5y^2,
+  \qquad 2k+r=x-y.
+\]
+Therefore $H=x^2+x-5y^2-y$.  On the other hand,
+\[
+  P\left(x+\frac12,y+\frac1{10}\right)
+  =x^2+x-5y^2-y+\frac15.
+\]
+The parity statement follows from $r=x-3y\equiv x+y\pmod2$.
+\end{proof}
+
+Let the bilinear form associated with $P$ be
+\[
+  \mathcal B((X,Y),(X',Y')):=2(XX'-5YY').
+\]
+Choose the two negative vectors
+\[
+  c_1=(0,1),\qquad c_2=(-5,3),
+\]
+for which
+\[
+  P(c_1)=-5,\qquad P(c_2)=-20.
+\]
+
+\begin{proposition}[Corrected bilinear signs]\label{prop:bilinear}
+For $v_{k,r}=(x+\tfrac12,y+\tfrac1{10})$,
+\[
+  \mathcal B(v_{k,r},c_1)=-(10k+1)
+\]
+and
+\[
+  \mathcal B(v_{k,r},c_2)=-10(6k+r)-8.
+\]
+Neither expression vanishes for integral $k,r$.
+\end{proposition}
+
+\begin{proof}
+Since $y=k$,
+\[
+  \mathcal B(v_{k,r},c_1)
+  =2\left(0-5\left(k+\frac1{10}\right)\right)
+  =-(10k+1).
+\]
+Since $x=r+3k$ and $y=k$,
+\begin{align*}
+  \mathcal B(v_{k,r},c_2)
+  &=2\left[-5\left(x+\frac12\right)
+       -15\left(y+\frac1{10}\right)\right]\\
+  &=-10x-30y-8\\
+  &=-10(r+6k)-8.
+\end{align*}
+The first expression is odd, and the second is congruent to $2$ modulo
+$10$, so neither is zero.
+\end{proof}
+
+\begin{theorem}[The slab as a sign-difference cone]
+\label{thm:sign-cone}
+For every $(k,r)\in\ZZ^2$,
+\[
+  \mathbf 1_{\Splus}(k,r)-\mathbf 1_{\Sminus}(k,r)
+  =\frac12\left(
+    \sgn\mathcal B(v_{k,r},c_2)
+    -\sgn\mathcal B(v_{k,r},c_1)
+  \right).
+\]
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:bilinear},
+\[
+  \sgn\mathcal B(v_{k,r},c_1)=
+  \begin{cases}
+    -1,&k\geq0,\\
+    +1,&k\leq-1,
+  \end{cases}
+\]
+and
+\[
+  \sgn\mathcal B(v_{k,r},c_2)=
+  \begin{cases}
+    +1,&6k+r\leq-1,\\
+    -1,&6k+r\geq0.
+  \end{cases}
+\]
+The four possible sign pairs give respectively the values $1$, $-1$,
+and $0$ off the two slabs, exactly as stated.
+\end{proof}
+
+Put $q=e^{2\pi i\tau}$ with $\tau$ in the upper half-plane.  Combining
+Theorem~\ref{thm:slab}, Proposition~\ref{prop:pell-shift}, and
+Theorem~\ref{thm:sign-cone} gives the exact expression
+\begin{align}
+  B(q)
+  ={}&q^{-1/10}
+  \sum_{(x,y)\in\ZZ^2}(-1)^{x+y}
+  \frac{\sgn\mathcal B((x,y)+\mu,c_2)
+       -\sgn\mathcal B((x,y)+\mu,c_1)}2
+  q^{P((x,y)+\mu)/2}.
+  \label{eq:zwegers-series}
+\end{align}
+
+For the exact comparison with Zwegers' convention, put
+\[
+  Q_0(X,Y):=\frac12(X^2-5Y^2),
+  \qquad
+  \mathcal B_0((X,Y),(X',Y')):=XX'-5YY'.
+\]
+Thus $Q_0(v)=\tfrac12v^tAv$ for
+$A=\operatorname{diag}(1,-5)$, and
+$\mathcal B=2\mathcal B_0$.  Set
+\[
+  a:=\mu=\left(\frac12,\frac1{10}\right),
+  \qquad
+  b:=\left(\frac12,-\frac1{10}\right).
+\]
+For $v=(x,y)+a$ one has
+\begin{equation}\label{eq:characteristic-phase}
+  e^{2\pi i\mathcal B_0(v,b)}
+  =e^{3\pi i/5}(-1)^{x+y}.
+\end{equation}
+
+\begin{theorem}[Exact Zwegers component]\label{thm:zwegers-identification}
+Let $F(\tau):=q^{1/10}B(q)$.  In the notation of Definition~2.1 of
+\cite{oZw02},
+\begin{equation}\label{eq:exact-completion}
+  \widehat F(\tau)
+  =\frac12e^{-3\pi i/5}
+    \vartheta_{a,b}^{c_2,c_1}(\tau).
+\end{equation}
+Its holomorphic sign part is $F$.  Moreover
+\begin{equation}\label{eq:T-transform}
+  \widehat F(\tau+1)=e^{\pi i/5}\widehat F(\tau)
+\end{equation}
+and
+\begin{equation}\label{eq:S-transform}
+  \widehat F(-1/\tau)
+  =\frac{\tau}{2\sqrt5}\sum_{m=0}^{4}
+    \vartheta_{\,b+(0,m/5),\,-a}^{c_2,c_1}(\tau).
+\end{equation}
+Thus $\widehat F$ belongs to the finite characteristic orbit supplied
+by Zwegers' weight-one transformation formulas.
+\end{theorem}
+
+\begin{proof}
+Equation~\eqref{eq:zwegers-series}, the identity
+\eqref{eq:characteristic-phase}, and the fact that
+$\mathcal B$ and $\mathcal B_0$ have the same signs give
+\eqref{eq:exact-completion}.  Both vectors are negative for $Q_0$
+and lie in the same negative component,
+since
+\[
+  \mathcal B_0(c_1,c_2)=-15<0;
+\]
+Proposition~\ref{prop:bilinear} shows that no shifted lattice point lies
+on either boundary.  Zwegers' completion theorem applies.
+
+For the $T$-transformation, Corollary~2.9 of \cite{oZw02} gives the
+factor $e^{-2\pi iQ_0(a)}=e^{-\pi i/5}$ and replaces $b$ by
+$a+b+\tfrac12(1,1)$.  The corollary's second exponential factor is
+$1$, because
+$\mathcal B_0(A^{-1}A^{\ast},a)=\mathcal B_0((1,1),a)=0$.
+The new characteristic differs from $b$ by $(1,3/5)$, an element of
+$A^{-1}\ZZ^2$, and the characteristic shift contributes
+$e^{2\pi i\mathcal B_0(a,(1,3/5))}=e^{2\pi i/5}$.  Their product is
+$e^{\pi i/5}$, proving \eqref{eq:T-transform}.
+
+For $S$, the same corollary sums over
+$A^{-1}\ZZ^2/\ZZ^2$, represented by $(0,m/5)$ for $0\leq m<5$.
+Here $\det A=-5$ and
+$\mathcal B_0(a,b)=3/10$, so its prefactor is
+$(\tau/\sqrt5)e^{3\pi i/5}$.  Multiplication by the constant in
+\eqref{eq:exact-completion} gives \eqref{eq:S-transform}.
+\end{proof}
+
+%----------------------------------------------------------------------
+\section{One-sided completion and the mixed boundary derivative}
+\label{sec:shadow}
+%----------------------------------------------------------------------
+
+We now distinguish the two boundary corrections.  The argument is
+concrete and does not infer an analytic category merely from the inequality
+$P(c_1)\neq P(c_2)$.
+
+\begin{lemma}[Odd-theta cancellation]\label{lem:odd-theta}
+For every $a>0$ and every $\tau$ in the upper half-plane,
+\[
+  \sum_{n\in\ZZ}(-1)^n
+  e^{2\pi i\tau a(n+1/2)^2}=0.
+\]
+\end{lemma}
+
+\begin{proof}
+The involution $n\mapsto-1-n$ preserves $(n+\tfrac12)^2$ and changes
+$(-1)^n$ to its negative.  It has no integral fixed point, so the terms
+cancel in pairs.
+\end{proof}
+
+\begin{proposition}[The $c_1$ correction vanishes]
+\label{prop:c1-vanishes}
+In the Zwegers completion of Theorem~\ref{thm:zwegers-identification},
+the boundary correction attached to $c_1=(0,1)$ is identically zero.
+\end{proposition}
+
+\begin{proof}
+The vector $e_1=(1,0)$ satisfies
+\[
+  \mathcal B(c_1,e_1)=2\bigl(0\cdot 1-5\cdot 1\cdot 0\bigr)=0,
+  \qquad |\det(c_1,e_1)|=1,
+\]
+so the lattice splits unimodularly in the $c_1$ and $e_1$ directions.
+On each longitudinal fiber the transverse variable is $x$ with shift
+$\tfrac12$, and the character restricts as
+$(-1)^{x+y}=(-1)^{y}\cdot(-1)^{x}$, i.e.\ to $(-1)^n$ on the
+transverse fiber.  The correction therefore
+factors into its longitudinal error-function term times the transverse
+series in Lemma~\ref{lem:odd-theta}.  The latter vanishes identically,
+so the complete $c_1$ correction vanishes.
+\end{proof}
+
+For the second boundary, take $e_2=(3,-1)$.  Then
+$\mathcal B_0(c_2,e_2)=0$ and $|\det(c_2,e_2)|=4$, so the boundary
+lattice has four residue components.  For $v=(x,y)+a$, write
+\[
+  n:=5x+15y+4,
+  \qquad
+  T:=3x+5y+2.
+\]
+The inverse formulas are
+\[
+  x=\frac{3T-n-2}{4},
+  \qquad
+  y=\frac{3n-5T-2}{20},
+\]
+so the integer lattice is the disjoint union, for $j\in\ZZ/4\ZZ$, of
+the pairs satisfying
+\[
+  n\equiv5j+4\pmod{20},
+  \qquad
+  T\equiv3j+2\pmod4.
+\]
+Moreover
+\begin{equation}\label{eq:orthogonal-Q}
+  v=\frac{n}{20}c_2+\frac{T}{4}e_2,
+  \qquad
+  Q_0(v)=\frac{T^2}{8}-\frac{n^2}{40},
+  \qquad
+  (-1)^{x+y}=(-1)^j.
+\end{equation}
+
+Define the transverse and longitudinal theta series
+\begin{equation}\label{eq:theta-g-defs}
+  \theta_j(\tau):=
+  \sum_{\substack{T\in\ZZ\\T\equiv3j+2\ (4)}}q^{T^2/8},
+  \qquad
+  g_j(\tau):=
+  \sum_{\substack{n\in\ZZ\\n\equiv5j+4\ (20)}}nq^{n^2/40}.
+\end{equation}
+These are vector-valued unary theta components of weights
+$\tfrac12$ and $\tfrac32$, respectively.
+
+\begin{proposition}[Exact boundary derivative]\label{prop:shadow}
+Put $Y=\operatorname{Im}(\tau)$.
+For the completion \eqref{eq:exact-completion},
+\begin{equation}\label{eq:dbar-exact}
+  \frac{\partial\widehat F}{\partial\overline\tau}
+  =-\frac{i}{4\sqrt{10Y}}
+    \sum_{j=0}^{3}(-1)^j\theta_j(\tau)\overline{g_j(\tau)}.
+\end{equation}
+Consequently
+\begin{equation}\label{eq:xi-exact}
+  \xi_1(\widehat F)
+  =-\frac{\sqrt Y}{2\sqrt{10}}
+    \sum_{j=0}^{3}(-1)^j\overline{\theta_j(\tau)}g_j(\tau).
+\end{equation}
+Both expressions are nonzero, and \eqref{eq:xi-exact} is not
+holomorphic.
+\end{proposition}
+
+\begin{proof}
+For the second boundary,
+\[
+  \mathcal B_0(c_2,v)=-n,
+  \qquad Q_0(c_2)=-10.
+\]
+Zwegers' error kernel is therefore
+$E(-n\sqrt{Y/10})$.  Since
+$E'(z)=2e^{-\pi z^2}$,
+\[
+  \frac{\partial}{\partial\overline\tau}
+  E(-n\sqrt{Y/10})
+  =-\frac{in}{2\sqrt{10Y}}e^{-\pi n^2Y/10}.
+\]
+Insert this identity in \eqref{eq:exact-completion}, use
+\eqref{eq:orthogonal-Q}, and group by $j$.  The constant phase in
+\eqref{eq:characteristic-phase} cancels the prefactor in
+\eqref{eq:exact-completion}, yielding \eqref{eq:dbar-exact}.  The
+$c_1$ derivative contributes zero by
+Proposition~\ref{prop:c1-vanishes}.  Taking complex conjugates and
+multiplying by $2iY$ gives \eqref{eq:xi-exact}.
+
+For nonvanishing, the $j=3$ component has the unique lowest
+antiholomorphic exponent: $n=-1$ contributes
+$-\overline q^{1/40}$ to $\overline{g_3}$, while $T=-1$ contributes
+$q^{1/8}$ to $\theta_3$.  No other $g_j$ has exponent $1/40$.
+Hence the coefficient of $q^{1/8}\overline q^{1/40}$ in
+\eqref{eq:dbar-exact} is nonzero.  Formula \eqref{eq:xi-exact}
+contains the corresponding nonconstant factor
+$\overline{\theta_3}$, so it is not holomorphic.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The transformation statements are
+Theorem~\ref{thm:zwegers-identification}; the differential statements
+are Proposition~\ref{prop:shadow}.  For a weight-one harmonic Maass
+form, the $\xi_1$ image is holomorphic of weight one.  Since
+\eqref{eq:xi-exact} is not holomorphic, this completion is not
+harmonic.  Thus this construction does not establish ordinary
+weight-one mock modularity in the standard harmonic-Maass sense; see
+\cite{jBF04} for the operator convention and
+\cite{oBFOR17} for the harmonic-Maass framework.  The calculation
+alone does not rule out the existence of
+a different harmonic completion of $F$.
+\end{proof}
+
+%----------------------------------------------------------------------
+\section{Comparison with the Maass cases}\label{sec:comparison}
+%----------------------------------------------------------------------
+
+The following table separates the proved differential calculation from the
+structural comparison that motivates it.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.34\textwidth}p{0.34\textwidth}@{}}
+\toprule
+Feature & ADH/Cohen over $\QQ(\sqrt6)$ & $B$ over $\QQ(\sqrt5)$ \\
+\midrule
+Discriminant & $24$ & $20$ \\
+Negative-vector norms & equal, automorph-related & $-5$ and $-20$ \\
+Boundary corrections & cancel in the Maass construction & one vanishes, one survives \\
+Differential image & Maass-type cancellation & mixed theta expression \\
+Coefficient mechanism & Hecke-character descent & classical descent obstructed \\
+Result & Maass waveform & nonharmonic indefinite completion \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In the ADH/Cohen case, the relevant equal-norm vectors are related by a
+Pell automorphism, and the associated boundary terms combine to give
+the Maass construction \cite{jADH88,jCo88,jZw12}.  Here the norm
+inequality
+\[
+  P(c_1)=-5\neq-20=P(c_2)
+\]
+prevents any form-preserving automorphism from carrying one vector to
+the other.  This explains why the classical symmetry is unavailable,
+but it is not used as a converse theorem.  The analytic category is
+decided instead by the exact differential image in
+Section~\ref{sec:shadow}.
+
+The transverse parity gives a second concrete contrast.  At $c_1$ the
+primitive perpendicular direction is $(1,0)$, whose coordinate sum is
+odd, and the shifted transverse theta is killed by
+Lemma~\ref{lem:odd-theta}.  At $c_2$ the perpendicular direction is
+$(3,-1)$, whose coordinate sum is even, and the four residue components
+survive.  This concrete parity statement is sufficient for the present
+example; we do not assert a general if-and-only-if criterion for every
+shifted Pell lattice.
+
+Zwegers' mock Maass theta functions \cite{jZw12} already show that
+real-quadratic sign kernels can have nonholomorphic completions outside
+the classical Maass-waveform examples.  The contribution here is the
+exact placement of this cone series in that landscape: the
+specific shift, the corrected boundary signs, the one-sided vanishing,
+and the level-$40$ exponent normalization of the longitudinal theta
+components.  In particular, the paper does not present
+the general theory of mock Maass theta functions as new.
+
+%----------------------------------------------------------------------
+\section{Coefficient data, formalization scope, and open questions}
+\label{sec:status}
+%----------------------------------------------------------------------
+
+\subsection{A coefficient witness}
+The arithmetic function obtained from $B_N$ on integers
+$M\equiv1\pmod{10}$ is not multiplicative.  The smallest displayed
+witness from the companion paper is
+\[
+  B_1=1,\qquad B_3=-2,\qquad B_{34}=3,
+\]
+so that, for $11\cdot31=341$,
+\[
+  B_{(341-1)/10}=3\neq-2
+  =B_{(11-1)/10}B_{(31-1)/10}.
+\]
+This fact is logically separate from Theorem~\ref{thm:main}: the
+analytic classification uses the exact completion and its derivative,
+not a contrapositive argument from nonmultiplicativity.
+
+\subsection{Computational checks}
+Direct enumeration of the cone and slab definitions agrees
+coefficientwise well beyond the range needed for the examples in this
+paper.  The accompanying script \texttt{slab\_check.py} performs an
+independent exact-integer check for every $0\leq N\leq50$, prints the
+two coefficients, and reports pass or fail for each $N$.  Its bounds
+are derived from the cone inequalities rather than chosen as a search
+radius.
+
+\subsection{Coefficient statistics}
+Through $N\leq10^5$: $\max_N|B_N|=7$, first attained at $N=27252$;
+among the $19{,}617$ primes $p\equiv1\pmod{10}$ with
+$(p-1)/10\leq10^5$, every value $B_{(p-1)/10}$ lies in
+$\{-2,-1,+1,+2\}$, with magnitude $1$ for $13{,}097$ primes
+($66.8\%$) and magnitude $2$ for $6520$ primes ($33.2\%$); there are
+$4904$ indices at which
+$10N+1$ is a norm but $B_N=0$, all composite.  Empirically
+$|B_N|=O\bigl(d(10N+1)\bigr)$, a divisor-type bound.  The companion
+paper explains the observed prime-magnitude split using an invariant
+that combines an archimedean sector label with a congruence label.  Its
+density statement is logically separate from the present analysis.
+
+\subsection{Lean scope}
+The Lean development checks the finite algebraic identities used for
+the cone coefficients, the involution, the slab decomposition, the
+Pell-coordinate formulas, the boundary-sign certificates, and a
+finite residue-support surrogate, with no admitted lemmas in that
+certificate layer.  The coefficient value $B_{34}=3$ is checked by
+kernel evaluation and depends only on Lean's usual three axioms.
+The analytic completion theorem from
+Zwegers, the modular transformation law, and the analytic
+differentiation in Proposition~\ref{prop:shadow} are not formalized.
+The arithmetic foundations and their machine-checked scope are
+described in the companion paper \cite{companion}.
+
+\begin{remark}[Scope of the row-model provenance]
+The corresponding Lean theorem proves the finite coefficient
+convolution for \texttt{MKcoeff}.  Its declaration is
+\texttt{mk\_factorization}, in namespace \texttt{Ch10} within
+\texttt{QseriesFormalization}.  It is paired with
+\texttt{coneDiffH\_two\_mul}, which identifies the even cone
+coefficients with $B_N$, and \texttt{coneDiffH\_odd}, which proves
+odd-level vanishing.  The Jacobi-triple-product evaluation of the
+theta legs and the halved-variable Laurent-series restatement in
+Theorem~\ref{thm:mk-factorization} are manuscript proofs, not
+conclusions of that Lean endpoint.  No source-faithfulness theorem in
+the repository currently identifies \texttt{MKcoeff} with the older
+Chapter--10 object
+\[
+  \texttt{rhoEvenSourceOldRow\_missing}.
+\]
+Accordingly, no theorem about the full function $\Theta_{10}$ is
+deduced here.
+\end{remark}
+
+\subsection{A family suggested by the example}
+For squarefree $d\equiv5\pmod8$, the prime $2$ is inert in
+$\QQ(\sqrt d)$.  Elementary mod-$8$ arithmetic on the Pell equations
+$b^2-da'^2=1$ and $b^2-da'^2=4$ then forces alternating and constant
+transverse characters, respectively, at the two boundary directions,
+which suggests the one-sided pattern of Section~\ref{sec:shadow};
+this parity computation has been checked numerically for
+$d=5,13,29,37,53,61$.  The computation alone does not identify the
+relevant boundary vectors for every $d$, so we state only a
+conjecture.
+
+\begin{conjecture}\label{conj:family}
+Let $d\equiv5\pmod8$ be squarefree, and suppose a conductor-$2$
+dissection over $\QQ(\sqrt d)$ produces a signature-$(1,1)$ shifted
+lattice with boundary vectors $c_1(d)$, $c_2(d)$ of norms $-d$ and
+$-4d$, positioned as in the $d=5$ model of
+Section~\ref{sec:pell} (in particular
+$\mathcal B(c_1(d),c_2(d))<0$ and the shifted lattice avoids the
+boundary lines).  Then the correction at $c_1(d)$ vanishes by the odd
+pairing of Lemma~\ref{lem:odd-theta}, the correction at $c_2(d)$
+survives, and the residual indefinite theta function has a nonzero
+mixed boundary derivative.
+\end{conjecture}
+
+\subsection{Open questions}
+\begin{enumerate}
+\item What is the minimal closed vector of characteristics containing
+$\widehat F$ under $S$ and $T$, and what is its smallest congruence
+subgroup realization?
+\item Which other classical dissections produce one-sided or two-sided
+boundary corrections?
+\item Are the coefficients $B_N$ unbounded, and can one prove a
+divisor-type upper bound from the norm interpretation?
+\item For which squarefree $d$ can the conductor-$2$ boundary vectors
+be determined uniformly enough to decide Conjecture~\ref{conj:family}?
+\end{enumerate}
+
+\subsection*{Acknowledgments}
+The author thanks the readers who identified the separation needed
+between the companion arithmetic foundations and the analytic content
+of this paper.
+
+\bibliographystyle{plain}
+\bibliography{master}
+
+\end{document}

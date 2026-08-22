@@ -1,0 +1,5 @@
+import Solution
+
+#print axioms PalomarQseriesRowFactorization.mk_factorization
+#print axioms PalomarQseriesRowFactorization.coneDiffH_two_mul
+#print axioms PalomarQseriesRowFactorization.coneDiffH_odd
