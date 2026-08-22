@@ -6,12 +6,6 @@
     "PalomarQseriesRowFactorization.coneDiffH_two_mul",
     "PalomarQseriesRowFactorization.coneDiffH_odd"
   ],
-  "definition_names": [
-    "PalomarQseriesRowFactorization.MKcoeff",
-    "PalomarQseriesRowFactorization.QoutCoeff",
-    "PalomarQseriesRowFactorization.coneDiffH",
-    "PalomarQseriesRowFactorization.BCoeff"
-  ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true
 }

@@ -33,7 +33,7 @@ sources:
     id: "doi:10.1142/S1793042110003150"
     type: paper
     location: "https://doi.org/10.1142/S1793042110003150"
-    relationship: builds-on
+    relationship: background
     note: >-
       Chan's tenth-order dissection motivates the shifted row model. No
       source-faithfulness theorem connecting the registered model to an older
@@ -91,13 +91,14 @@ review:
 alignment:
   namespace: "PalomarQseriesRowFactorization"
   statements:
-    - source: "Paper, Theorem: Row-model factorization"
+    - source: "Paper, row-model section: finite coefficientwise separation underlying the Row-model factorization theorem"
       lean: "PalomarQseriesRowFactorization.mk_factorization"
       module: "Challenge"
       status: proved
       note: >-
         States the exact finite convolution, including the lower coefficient
-        bound -2 and all integer coercions.
+        bound -2 and all integer coercions. The manuscript's Laurent-series
+        assembly and Jacobi-product evaluation are outside Lean.
     - source: "Paper, finite even-level cone identification"
       lean: "PalomarQseriesRowFactorization.coneDiffH_two_mul"
       module: "Challenge"

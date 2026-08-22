@@ -15,7 +15,7 @@ snapshot in `paper/`.
 
 `Challenge.lean` states three finite coefficient identities:
 
-- `mk_factorization` separates the shifted missing-kernel coefficient into a
+- `mk_factorization` separates the shifted row-model kernel coefficient into a
   convolution of two explicit positive-definite theta legs with a same-sign
   cone difference;
 - `coneDiffH_two_mul` identifies every even cone level with the independently

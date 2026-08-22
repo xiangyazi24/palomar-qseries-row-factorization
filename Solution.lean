@@ -112,7 +112,7 @@ def mkRowCoeff (k T : Int) : Int :=
   ∑ a ∈ Finset.Icc (-2) (T - rowMin k),
     QoutCoeff a * rowMixedCoeff k (T - a)
 
-/-- Coefficient of the shifted missing kernel. -/
+/-- Coefficient of the shifted row-model kernel. -/
 def MKcoeff (T : Int) : Int :=
   ∑ k ∈ Finset.Icc (-mkKBound T) (mkKBound T),
     rowEpsilon k * mkRowCoeff k T
