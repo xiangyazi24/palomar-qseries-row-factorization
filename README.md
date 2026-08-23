@@ -1,5 +1,12 @@
 # Q-series finite row factorization
 
+> **Local blocked wrapper.** Xiang submits a paper-associated Palomar entry
+> only after the paper's complete headline theorem chain is formalized.  This
+> package currently proves only the finite row-model layer; the analytic
+> completion, transformations, derivative, and nonharmonicity theorem are not
+> yet in Lean.  Keep this repository local: do not create its public GitHub
+> repository or begin Palomar intake until the full-paper gate is closed.
+
 This repository prepares a
 [Palomar](https://palomar-registry.org/) entry associated with
 *A shifted indefinite theta completion over Q(sqrt(5)): an asymmetric
