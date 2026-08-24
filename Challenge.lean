@@ -271,8 +271,8 @@ theorem exact_completion_bridge {τ : ℂ} (hτ : 0 < τ.im) :
         paper2LatticeCorrection τ := by
   sorry
 
-/-- The defining lattice series of the normalized completed theta converges
-absolutely throughout the upper half-plane. -/
+/-- The defining lattice series of the normalized completed theta is summable
+throughout the upper half-plane. -/
 theorem completedTheta_summable {τ : ℂ} (hτ : 0 < τ.im) :
     Summable (fun n : ℤ × ℤ =>
       paper2ThetaABTerm (1 / 2, 1 / 10) (1 / 2, -(1 / 10)) τ n) := by

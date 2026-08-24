@@ -25,8 +25,8 @@ analytic completed theta explicitly. Comparator checks ten declarations:
 3. `coneDiffH_odd`: vanishing of every odd cone level;
 4. `exact_completion_bridge`: the completed theta is the holomorphic sign
    part `q^(1/10) B(q)` plus the explicit two-boundary correction;
-5. `completedTheta_summable`: absolute convergence of the defining completed-
-   theta lattice series throughout the upper half-plane;
+5. `completedTheta_summable`: summability of the defining completed-theta
+   lattice series throughout the upper half-plane;
 6. `zwegers_lemma28`: the specialized Fourier-transform identity, including
    its exact square-root constant and exponential sign;
 7. `completedTheta_add_one`: the weight-one translation law;
