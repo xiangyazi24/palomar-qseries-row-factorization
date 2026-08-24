@@ -4,7 +4,13 @@
   "theorem_names": [
     "PalomarQseriesRowFactorization.mk_factorization",
     "PalomarQseriesRowFactorization.coneDiffH_two_mul",
-    "PalomarQseriesRowFactorization.coneDiffH_odd"
+    "PalomarQseriesRowFactorization.coneDiffH_odd",
+    "PalomarQseriesRowFactorization.exact_completion_bridge",
+    "PalomarQseriesRowFactorization.zwegers_lemma28",
+    "PalomarQseriesRowFactorization.completedTheta_add_one",
+    "PalomarQseriesRowFactorization.completedTheta_S",
+    "PalomarQseriesRowFactorization.exact_differential_image",
+    "PalomarQseriesRowFactorization.completedTheta_not_harmonic"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true

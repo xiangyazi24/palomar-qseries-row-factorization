@@ -5,8 +5,9 @@ import Mathlib.Algebra.Ring.Int.Parity
 /-!
 # Ch10: Norm-Supported Indefinite Theta Series over Q(√5)
 
-Definitions for the formalization of the Q(√5) norm theta series B(X)
-arising from Chan's Θ₁₀(q).
+Definitions for the independently specified Q(√5) norm theta series B(X)
+studied in Paper 3.  No source-faithful identification with Chan's missing
+kernel is assumed here.
 
 ## Main definitions
 

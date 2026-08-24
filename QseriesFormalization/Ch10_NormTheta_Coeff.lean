@@ -7,7 +7,7 @@ B_N = Σ BWeight(k,r) over all (k,r) with E(k,r) = N.
 Formalized as BCoeff = ACoeff + DCoeff, with completeness lemmas showing
 the bounding boxes capture all solutions.
 
-## Strategy (dual-oracle R3)
+## Strategy
 - Nat-parametrize each cone: A-cone ≅ ℕ², D-cone via (m,s) ↦ (-(m+1),-(s+1))
 - Crude bounds via Q = 2N (division-free): k ≤ N, r ≤ 2N+1
 - Completeness: if in cone and E = N, then in box

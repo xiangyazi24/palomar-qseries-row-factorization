@@ -2,11 +2,14 @@
 version: "v0.4"
 
 project:
-  name: "Finite row factorization for a shifted indefinite theta kernel"
+  name: "A shifted indefinite theta completion over Q(sqrt(5))"
   description: >-
-    A Lean 4 verification of the finite coefficientwise row factorization,
-    its identification with the Q(sqrt(5)) norm-theta coefficient at every
-    even level, and vanishing at every odd level.
+    A Lean 4 verification of an explicit rank-two indefinite theta completion
+    over Q(sqrt(5)). The registered results cover the coefficientwise row-model
+    factorization; the exact holomorphic-sign-part bridge; a specialization of
+    Zwegers' Lemma 2.8; the weight-one T and S transformations, including the
+    five-to-two characteristic reduction; the exact mixed boundary derivative
+    and Bruinier--Funke image; and a kernel-checked nonharmonicity witness.
   authors:
     - "Xiang Huang"
   license: "Apache-2.0"
@@ -21,98 +24,197 @@ sources:
   - title: "A shifted indefinite theta completion over Q(sqrt(5)): an asymmetric boundary derivative and a row-model factorization"
     authors:
       - "Xiang Huang"
-    type: paper
+    type: original-proof
+    location: "paper/paper2.pdf"
     relationship: formalizes
+    author_endorsement: participated
     note: >-
-      The registered declarations formalize the finite row-model factorization
-      and its even/odd coefficient consequences. The paper's analytic results
-      and Jacobi-product evaluation are outside the registered Lean scope.
+      The paper and formalization were developed together. Comparator covers
+      the paper's row-model factorization, completed-theta bridge, Lemma 2.8
+      specialization, T and S transformations, exact differential images, and
+      nonharmonicity conclusion.
+  - title: "Mock theta functions"
+    authors:
+      - "Sander Zwegers"
+    type: thesis
+    location: "Utrecht University, 2002, Definition 2.1, Lemma 2.8, and Corollary 2.9"
+    relationship: formalizes
+    author_endorsement: not-contacted
+    note: >-
+      The analytic part specializes the rank-two indefinite-theta kernel and
+      proves the Fourier-transform and transformation identities needed for
+      the manuscript's exact characteristics.
   - title: "Ramanujan's cubic continued fraction and an analog of his most beautiful identity"
     authors:
       - "Hei-Chi Chan"
     id: "doi:10.1142/S1793042110003150"
     type: paper
-    location: "https://doi.org/10.1142/S1793042110003150"
+    location: "International Journal of Number Theory 6 (2010), 673-680"
     relationship: background
+    author_endorsement: not-contacted
     note: >-
-      Chan's tenth-order dissection motivates the shifted row model. No
-      source-faithfulness theorem connecting the registered model to an older
-      project expression is included.
+      Chan's tenth-order dissection motivates the paper's row model. The
+      registered result does not claim a source-to-model identification with
+      an older project object.
 
-related_formalizations: []
+related_formalizations:
+  - id: "xiangyazi24/Q-series-and-Chan-s-work"
+    relationship: other
+    note: >-
+      Private canonical development from which the 39-file transitive proof
+      closure was extracted at commit
+      93ade4af0234cdd007215842f8b4fbbbb9535985. It is not a build dependency.
 
 status:
   scope: >-
-    Comparator checks three declarations: the finite convolution identity for
-    MKcoeff, the identification coneDiffH(2N)=BCoeff(N) for every natural N,
-    and vanishing of coneDiffH(m) whenever 2 does not divide the integer m.
-    Every coefficient is defined by an explicit finite Finset sum.
+    Comparator checks nine Solution declarations: three finite row-model
+    coefficient theorems, the exact completed-theta/sign-part bridge, the
+    specialized Lemma 2.8, the T transformation, the five-term and reduced
+    two-term S laws, the exact dbar and xi images, and the explicit
+    nonharmonicity/nonvanishing certificate.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
+  main_results:
+    - declaration: "PalomarQseriesRowFactorization.mk_factorization"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.coneDiffH_two_mul"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.coneDiffH_odd"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.exact_completion_bridge"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.zwegers_lemma28"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.completedTheta_add_one"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.completedTheta_S"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.exact_differential_image"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.completedTheta_not_harmonic"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
 
 automation:
   methods:
     - method: agent
-      models: ["Claude", "ChatGPT", "OpenAI Codex"]
-      framework: "Lean 4 with remote build and multi-model review"
+      models: ["OpenAI Codex", "Claude Opus", "ChatGPT"]
+      framework: "Lean 4 with remote builds and independent statement review"
       tool_setup: >-
-        AI-assisted proof development, statement comparison, dependency
-        auditing, clean Linux builds, and axiom inspection under human
-        direction.
+        AI-assisted proof development, exact statement comparison, dependency
+        extraction, clean Linux builds, and transitive axiom inspection under
+        human direction.
       cost:
         wall_time: "not reconstructed"
         spend_usd: "subscription-based"
         hardware: "Mac mini orchestration and uisai2 Linux verification"
       prompting_notes: >-
-        Agents proposed and reviewed proof steps; every retained declaration
-        is checked by Lean and the advertised theorem surface is axiom-audited.
+        Agents proposed, implemented, and reviewed proof steps. Every retained
+        Solution declaration is checked by Lean, selected by Comparator, and
+        independently inspected through permanent #print axioms commands.
   spend_usd: "subscription-based"
   notes: >-
     The submission record retains only claims supported by the pinned public
-    source and Comparator result.
+    source, Comparator, and the attached manuscript.
 
 fidelity:
   divergences: >-
-    The formalization proves the finite coefficient algebra underlying the
-    manuscript's row model. It does not formalize the Jacobi triple product,
-    the halved-variable Laurent-series identity, the Zwegers completion,
-    modular transformation formulas, the mixed theta derivative, or any
-    theorem identifying this model with an older Chan-project source object.
+    The formalization proves the explicit convergent completed theta and its
+    transformation and differential formulas. It does not assert uniqueness or
+    canonicity among all possible completions, does not construct a closed
+    vector-valued representation, and does not identify the paper's row model
+    with an older Chan-project source object. The paper states the same limits.
 
 review:
   status: "agent-reviewed"
   reviewers:
-    - "OpenAI Codex"
+    - "OpenAI Codex (Sol max)"
   notes: >-
-    The extracted closure, manuscripts, and public Challenge/Solution surface
-    are undergoing exact-commit independent review before publication.
+    The independent Sol max audit passed the mathematical and manuscript
+    alignment after two publication-infrastructure repairs. A separately
+    requested cold Fable review remains pending because the provider's weekly
+    quota is unavailable until 2026-08-28.
 
 alignment:
   namespace: "PalomarQseriesRowFactorization"
   statements:
-    - source: "Paper, row-model section: finite coefficientwise separation underlying the Row-model factorization theorem"
+    - source: "Paper, Theorem 5.7: coefficientwise row-model factorization"
       lean: "PalomarQseriesRowFactorization.mk_factorization"
       module: "Challenge"
       status: proved
       note: >-
-        States the exact finite convolution, including the lower coefficient
-        bound -2 and all integer coercions. The manuscript's Laurent-series
-        assembly and Jacobi-product evaluation are outside Lean.
-    - source: "Paper, finite even-level cone identification"
+        Together with the next two declarations, this gives the finite
+        coefficient identity assembled internally into the Laurent-series
+        factorization.
+    - source: "Paper, row-model even-level identification"
       lean: "PalomarQseriesRowFactorization.coneDiffH_two_mul"
       module: "Challenge"
       status: proved
-      note: >-
-        Identifies the row-level cone difference with BCoeff for every natural
-        coefficient index.
-    - source: "Paper, odd-level vanishing"
+      note: "Every even row level is the manuscript coefficient."
+    - source: "Paper, row-model odd-level vanishing"
       lean: "PalomarQseriesRowFactorization.coneDiffH_odd"
       module: "Challenge"
       status: proved
-      note: >-
-        Proves vanishing for every integer level not divisible by two.
+      note: "Every odd row level vanishes."
+    - source: "Paper, Theorem 1.1 and equation (5): exact completion and holomorphic sign part"
+      lean: "PalomarQseriesRowFactorization.exact_completion_bridge"
+      module: "Challenge"
+      status: proved
+      note: "Identifies the holomorphic sign part with q^(1/10) B(q)."
+    - source: "Zwegers, Lemma 2.8 specialized to the paper's quadratic data"
+      lean: "PalomarQseriesRowFactorization.zwegers_lemma28"
+      module: "Challenge"
+      status: proved
+      note: "Includes the exact transform constant and negative inverse exponential."
+    - source: "Paper, equation (6): T transformation"
+      lean: "PalomarQseriesRowFactorization.completedTheta_add_one"
+      module: "Challenge"
+      status: proved
+      note: "The upper-half-plane condition is the only binder beyond tau."
+    - source: "Paper, Theorem 1.1 and equation (7): S transformation and two-component reduction"
+      lean: "PalomarQseriesRowFactorization.completedTheta_S"
+      module: "Challenge"
+      status: proved
+      note: "States both the five-term formula and its algebraic two-term form."
+    - source: "Paper, Proposition 7.3: exact boundary derivative and xi image"
+      lean: "PalomarQseriesRowFactorization.exact_differential_image"
+      module: "Challenge"
+      status: proved
+      note: "Both mixed unary-theta expressions are registered in one conjunction."
+    - source: "Paper, Theorem 1.1: nonzero differential image and nonharmonicity"
+      lean: "PalomarQseriesRowFactorization.completedTheta_not_harmonic"
+      module: "Challenge"
+      status: proved
+      note: "Uses the explicit point 2i to refute the weight-one harmonicity equation."
 
 acknowledgements: >-
-  Mathlib and Lean provide the formal foundation. Chan's q-series identity
-  supplies the motivating dissection context.
+  Mathlib and Lean provide the formal foundation. Zwegers' thesis supplies the
+  general indefinite-theta framework, and Chan's q-series work supplies the
+  motivating dissection context.

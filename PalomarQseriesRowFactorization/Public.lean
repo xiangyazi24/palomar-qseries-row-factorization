@@ -1,11 +1,11 @@
 import Mathlib
 
 /-!
-# A complete shifted indefinite-theta completion over Q(sqrt(5))
+# Public statement definitions for Paper 2
 
-This Mathlib-only Challenge states the coefficientwise row factorization and
-the analytic headline results of Paper 2.  The definitions are duplicated in
-the Solution-side public module and checked byte-for-byte for drift.
+This module duplicates the definition block in `Challenge.lean`.  The
+Comparator sees the Mathlib-only Challenge, while `Solution.lean` transports
+these definitions to the extracted kernel-checked implementation.
 -/
 
 namespace PalomarQseriesRowFactorization
@@ -243,91 +243,6 @@ def Delta1 (f : ℂ → ℂ) (τ : ℂ) : ℂ :=
   -xi1 (xi1 f) τ
 
 /-! ## END PUBLIC STATEMENT DEFINITIONS -/
-
-/-! ## Registered theorems -/
-
-/-- Finite coefficientwise separation of the shifted row model. -/
-theorem mk_factorization (T : Int) :
-    MKcoeff T =
-      ∑ a ∈ Finset.Icc (-2) T,
-        QoutCoeff a * coneDiffH (T - a) := by
-  sorry
-
-/-- Even row levels recover the norm-theta coefficient. -/
-theorem coneDiffH_two_mul (N : Nat) :
-    coneDiffH (2 * (N : Int)) = BCoeff N := by
-  sorry
-
-/-- Odd row levels vanish. -/
-theorem coneDiffH_odd {m : Int} (hm : ¬ 2 ∣ m) :
-    coneDiffH m = 0 := by
-  sorry
-
-/-- The completed theta has holomorphic sign part
-`q^(1/10) B(q)` and the explicit two-boundary correction. -/
-theorem exact_completion_bridge {τ : ℂ} (hτ : 0 < τ.im) :
-    paper2CompletedTheta τ =
-      paper2NomeTenth τ * paper2BSeries (paper2Nome τ) +
-        paper2LatticeCorrection τ := by
-  sorry
-
-/-- Zwegers' Lemma 2.8, specialized to the quadratic form and cone vectors of
-Paper 2, including the exact square-root branch and exponential sign. -/
-theorem zwegers_lemma28 {τ : ℂ} (hτ : 0 < τ.im) (α : ℝ × ℝ) :
-    paper2H τ α =
-      (((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * (Complex.I / (-Complex.I * τ))) *
-        (paper2Rho α (-1 / τ) : ℂ) *
-          Complex.exp
-            (-(2 * (Real.pi : ℂ) * Complex.I *
-              ((paper2Q0 α.1 α.2 : ℝ) : ℂ) / τ)) := by
-  sorry
-
-/-- The weight-one translation law of the normalized completed theta. -/
-theorem completedTheta_add_one {τ : ℂ} (hτ : 0 < τ.im) :
-    paper2CompletedTheta (τ + 1) =
-      Complex.exp (Real.pi * Complex.I / 5) * paper2CompletedTheta τ := by
-  sorry
-
-/-- The manuscript's five-term S-law and its algebraic reduction to the two
-displayed characteristic components. -/
-theorem completedTheta_S {τ : ℂ} (hτ : 0 < τ.im) :
-    paper2CompletedTheta (-1 / τ) =
-        ((((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * τ) / 2) *
-          ∑ r : Fin 5, paper2ThetaAB_c2c1
-            (1 / 2, -(1 / 10) + (r : ℝ) / 5)
-            (-(1 / 2), -(1 / 10)) τ ∧
-    paper2CompletedTheta (-1 / τ) =
-        ((((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * τ) / 2) *
-          ((1 + Complex.exp (-((Real.pi : ℂ) * Complex.I) / 5)) *
-              paper2ThetaAB_c2c1
-                (1 / 2, 1 / 10) (-(1 / 2), -(1 / 10)) τ +
-            (1 + Complex.exp (3 * Real.pi * Complex.I / 5)) *
-              paper2ThetaAB_c2c1
-                (1 / 2, 7 / 10) (-(1 / 2), -(1 / 10)) τ) := by
-  sorry
-
-/-- The exact mixed boundary derivative and Bruinier--Funke image. -/
-theorem exact_differential_image {τ : ℂ} (hτ : 0 < τ.im) :
-    dbar paper2CompletedTheta τ =
-        -(Complex.I / (4 * ((Real.sqrt (10 * τ.im) : ℝ) : ℂ))) *
-          ∑ j ∈ Finset.range 4, (-1 : ℂ) ^ j *
-            paper2ThetaComponent (j : ℤ) τ *
-              (starRingEnd ℂ) (paper2GComponent (j : ℤ) τ) ∧
-    xi1 paper2CompletedTheta τ =
-        -(((Real.sqrt τ.im / (2 * Real.sqrt 10) : ℝ)) : ℂ) *
-          ∑ j ∈ Finset.range 4, (-1 : ℂ) ^ j *
-            (starRingEnd ℂ) (paper2ThetaComponent (j : ℤ) τ) *
-              paper2GComponent (j : ℤ) τ := by
-  sorry
-
-/-- The displayed differential images are nonzero and the completed theta is
-not weight-one harmonic; the explicit witness point is `2i`. -/
-theorem completedTheta_not_harmonic :
-    Delta1 paper2CompletedTheta (2 * Complex.I) ≠ 0 ∧
-    dbar (xi1 paper2CompletedTheta) (2 * Complex.I) ≠ 0 ∧
-    (fun τ => dbar paper2CompletedTheta τ) ≠ 0 ∧
-    xi1 paper2CompletedTheta ≠ 0 := by
-  sorry
 
 end
 

@@ -4,7 +4,7 @@ import QseriesFormalization.Ch10_NormTheta_Defs
 # Ch10: Algebraic Theorems
 
 Theorems 1-4, 6, 8 from the norm theta series paper.
-All proofs verified against Mathlib 4.30.0 by dual-oracle audit (Fable R2 + ChatGPT R2).
+All proofs are checked by Lean 4.30.0 and Mathlib.
 -/
 
 namespace QseriesFormalization

@@ -1,132 +1,66 @@
-import PalomarQseriesRowFactorization
+import PalomarQseriesRowFactorization.Public
+import QseriesFormalization.Ch10_Paper2_EvenCompression
+import QseriesFormalization.Ch10_Paper2_SignBridge
+import QseriesFormalization.Ch10_Paper2_ZwegersS
 
 /-!
-# Finite row factorization for a shifted indefinite theta kernel
+# Complete Paper 2 solution
 
-This file repeats the public statement surface and discharges its three
-theorems from the extracted internal proof closure.
+The public definitions are transported to the exact 39-file closure extracted
+from the canonical internal development. No historical Q-series certificate
+route is imported by this package.
 -/
 
 namespace PalomarQseriesRowFactorization
 
 noncomputable section
 
-/-! ## Norm-theta coefficients -/
+private theorem completedTheta_eq_internal (τ : ℂ) :
+    paper2CompletedTheta τ =
+      QseriesFormalization.Ch10.paper2LatticeTheta τ := by
+  unfold paper2CompletedTheta
+  exact (QseriesFormalization.Ch10.paper2LatticeTheta_eq_thetaAB τ).symm
 
-/-- The quadratic exponent before division by two. -/
-def Q (k r : Int) : Int :=
-  4 * k ^ 2 + 2 * k + r ^ 2 + (6 * k + 1) * r
+private theorem dbar_eq_internal (f : ℂ → ℂ) (τ : ℂ) :
+    dbar f τ = QseriesFormalization.Ch10.dbar f τ := by
+  rw [QseriesFormalization.Ch10.dbar_eq]
+  rfl
 
-/-- The triangular number `r(r+1)/2`. -/
-def triZ (r : Int) : Int := r * (r + 1) / 2
+private theorem xi1_eq_internal (f : ℂ → ℂ) (τ : ℂ) :
+    xi1 f τ = QseriesFormalization.Ch10.xi1 f τ := by
+  unfold xi1 QseriesFormalization.Ch10.xi1
+  rw [dbar_eq_internal]
 
-/-- The norm-theta exponent. -/
-def E (k r : Int) : Int :=
-  2 * k ^ 2 + k + 3 * k * r + triZ r
+private theorem Delta1_eq_internal (f : ℂ → ℂ) (τ : ℂ) :
+    Delta1 f τ = QseriesFormalization.Ch10.Delta1 f τ := by
+  unfold Delta1 QseriesFormalization.Ch10.Delta1
+  rw [xi1_eq_internal]
+  have hxi : xi1 f = QseriesFormalization.Ch10.xi1 f := by
+    funext z
+    exact xi1_eq_internal f z
+  rw [hxi]
 
-/-- The integral parity sign. -/
-def negOnePowInt (n : Int) : Int :=
-  if n % 2 = 0 then 1 else -1
+private theorem completedTheta_fun_eq_internal :
+    paper2CompletedTheta = QseriesFormalization.Ch10.paper2LatticeTheta := by
+  funext τ
+  exact completedTheta_eq_internal τ
 
-/-- Positive-cone coefficient. -/
-def ACoeff (N : Nat) : Int :=
-  ((Finset.range (N + 1) ×ˢ Finset.range (2 * N + 2)).filter
-    (fun p => E (↑p.1) (↑p.2) = ↑N)).sum
-    (fun p => -negOnePowInt (↑p.2))
+private theorem completedTheta_dbar_fun_eq_internal :
+    (fun τ => dbar paper2CompletedTheta τ) =
+      (fun τ => QseriesFormalization.Ch10.dbar
+        QseriesFormalization.Ch10.paper2LatticeTheta τ) := by
+  funext τ
+  rw [dbar_eq_internal, completedTheta_fun_eq_internal]
 
-/-- Negative-cone coefficient in translated natural coordinates. -/
-def DCoeff (N : Nat) : Int :=
-  ((Finset.range (N + 1) ×ˢ Finset.range (2 * N + 2)).filter
-    (fun p => E (-(↑p.1 + 1)) (-(↑p.2 + 1)) = ↑N)).sum
-    (fun p => negOnePowInt (-(↑p.2 + 1)))
+private theorem completedTheta_xi1_fun_eq_internal :
+    xi1 paper2CompletedTheta =
+      QseriesFormalization.Ch10.xi1
+        QseriesFormalization.Ch10.paper2LatticeTheta := by
+  funext τ
+  rw [xi1_eq_internal, completedTheta_fun_eq_internal]
 
-/-- Difference of the two norm-theta cones. -/
-def BCoeff (N : Nat) : Int := DCoeff N + ACoeff N
+/-! ## Registered proofs -/
 
-/-! ## Shifted-kernel coefficient model -/
-
-/-- The paper's row quadratic form. -/
-abbrev Hq (k r : Int) : Int := Q k r
-
-/-- The integer value of `(-1)^n`. -/
-def mkSign (n : Int) : Int := (Int.negOnePow n : Int)
-
-def thetaUBound (a : Int) : Int := |a| + 3
-
-def thetaVBound (a : Int) : Int := |a| + 4
-
-def thetaUCoeff (a : Int) : Int :=
-  ∑ u ∈ Finset.Icc (-thetaUBound a) (thetaUBound a),
-    if 5 * u ^ 2 - 3 * u = a then mkSign u else 0
-
-def thetaVCoeff (a : Int) : Int :=
-  ∑ v ∈ Finset.Icc (-thetaVBound a) (thetaVBound a),
-    if 5 * v ^ 2 - 7 * v = a then mkSign v else 0
-
-/-- Coefficient of the product of the two positive-definite theta legs. -/
-def QoutCoeff (a : Int) : Int :=
-  ∑ i ∈ Finset.Icc 0 (a + 2), thetaUCoeff i * thetaVCoeff (a - i)
-
-def rowDisc (k m : Int) : Int :=
-  4 * m - (16 * k ^ 2 + 8 * k) + (6 * k + 1) ^ 2
-
-def rowRBound (k m : Int) : Int :=
-  |rowDisc k m| + |6 * k + 1| + 2
-
-def rowFiber (k m : Int) : Finset Int :=
-  (Finset.Icc (-rowRBound k m) (rowRBound k m)).filter
-    (fun r => Hq k r = m)
-
-def mixedSide (k r : Int) : Prop :=
-  (0 ≤ k ∧ r ≤ -1) ∨ (k ≤ -1 ∧ 0 ≤ r)
-
-def coneSide (k r : Int) : Prop :=
-  (0 ≤ k ∧ 0 ≤ r) ∨ (k ≤ -1 ∧ r ≤ -1)
-
-instance (k r : Int) : Decidable (mixedSide k r) := by
-  unfold mixedSide
-  infer_instance
-
-instance (k r : Int) : Decidable (coneSide k r) := by
-  unfold coneSide
-  infer_instance
-
-def rowMixedCoeff (k m : Int) : Int :=
-  ((rowFiber k m).filter (mixedSide k)).sum mkSign
-
-def rowConeCoeff (k m : Int) : Int :=
-  ((rowFiber k m).filter (coneSide k)).sum mkSign
-
-def rowMin (k : Int) : Int :=
-  if 0 ≤ k then 4 * k ^ 2 + 2 * k else 4 * k ^ 2 - 4 * k
-
-def rowEpsilon (k : Int) : Int := if 0 ≤ k then 1 else -1
-
-/-- The transported row, with the outer `D-A` sign included. -/
-def coneSignedCoeff (k m : Int) : Int :=
-  -rowEpsilon k * rowConeCoeff k m
-
-def mkKBound (T : Int) : Int := |T| + 3
-
-def mkRowCoeff (k T : Int) : Int :=
-  ∑ a ∈ Finset.Icc (-2) (T - rowMin k),
-    QoutCoeff a * rowMixedCoeff k (T - a)
-
-/-- Coefficient of the shifted row-model kernel. -/
-def MKcoeff (T : Int) : Int :=
-  ∑ k ∈ Finset.Icc (-mkKBound T) (mkKBound T),
-    rowEpsilon k * mkRowCoeff k T
-
-def coneKBound (m : Int) : Int := |m| + 1
-
-/-- Coefficient of the same-sign cone difference at a fixed row level. -/
-def coneDiffH (m : Int) : Int :=
-  ∑ k ∈ Finset.Icc (-coneKBound m) (coneKBound m),
-    coneSignedCoeff k m
-
-/-! ## Registered theorems -/
-
-/-- Finite separation of the shifted kernel into a convolution. -/
 theorem mk_factorization (T : Int) :
     MKcoeff T =
       ∑ a ∈ Finset.Icc (-2) T,
@@ -137,18 +71,133 @@ theorem mk_factorization (T : Int) :
         QseriesFormalization.Ch10.coneDiffH (T - a)
   exact QseriesFormalization.Ch10.mk_factorization T
 
-/-- Even row levels recover the norm-theta coefficient. -/
 theorem coneDiffH_two_mul (N : Nat) :
     coneDiffH (2 * (N : Int)) = BCoeff N := by
   change QseriesFormalization.Ch10.coneDiffH (2 * (N : Int)) =
     QseriesFormalization.Ch10.BCoeff N
   exact QseriesFormalization.Ch10.coneDiffH_two_mul N
 
-/-- Odd row levels vanish. -/
 theorem coneDiffH_odd {m : Int} (hm : ¬ 2 ∣ m) :
     coneDiffH m = 0 := by
   change QseriesFormalization.Ch10.coneDiffH m = 0
   exact QseriesFormalization.Ch10.coneDiffH_odd hm
 
+theorem exact_completion_bridge {τ : ℂ} (hτ : 0 < τ.im) :
+    paper2CompletedTheta τ =
+      paper2NomeTenth τ * paper2BSeries (paper2Nome τ) +
+        paper2LatticeCorrection τ := by
+  rw [completedTheta_eq_internal]
+  change QseriesFormalization.Ch10.paper2LatticeTheta τ =
+    QseriesFormalization.Ch10.paper2NomeTenth τ *
+        QseriesFormalization.Ch10.paper2BSeries
+          (QseriesFormalization.Ch10.paper2Nome τ) +
+      QseriesFormalization.Ch10.paper2LatticeCorrection τ
+  exact QseriesFormalization.Ch10.paper2LatticeTheta_eq_bridge hτ
+
+theorem zwegers_lemma28 {τ : ℂ} (hτ : 0 < τ.im) (α : ℝ × ℝ) :
+    paper2H τ α =
+      (((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * (Complex.I / (-Complex.I * τ))) *
+        (paper2Rho α (-1 / τ) : ℂ) *
+          Complex.exp
+            (-(2 * (Real.pi : ℂ) * Complex.I *
+              ((paper2Q0 α.1 α.2 : ℝ) : ℂ) / τ)) := by
+  change QseriesFormalization.Ch10.paper2H τ α =
+    (((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * (Complex.I / (-Complex.I * τ))) *
+      (QseriesFormalization.Ch10.paper2Rho α (-1 / τ) : ℂ) *
+        Complex.exp
+          (-(2 * (Real.pi : ℂ) * Complex.I *
+            ((QseriesFormalization.Ch10.paper2Q0 α.1 α.2 : ℝ) : ℂ) / τ))
+  exact QseriesFormalization.Ch10.paper2_zwegers_lemma28 hτ α
+
+theorem completedTheta_add_one {τ : ℂ} (hτ : 0 < τ.im) :
+    paper2CompletedTheta (τ + 1) =
+      Complex.exp (Real.pi * Complex.I / 5) * paper2CompletedTheta τ := by
+  rw [completedTheta_eq_internal, completedTheta_eq_internal]
+  exact QseriesFormalization.Ch10.paper2LatticeTheta_add_one hτ
+
+theorem completedTheta_S {τ : ℂ} (hτ : 0 < τ.im) :
+    paper2CompletedTheta (-1 / τ) =
+        ((((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * τ) / 2) *
+          ∑ r : Fin 5, paper2ThetaAB_c2c1
+            (1 / 2, -(1 / 10) + (r : ℝ) / 5)
+            (-(1 / 2), -(1 / 10)) τ ∧
+    paper2CompletedTheta (-1 / τ) =
+        ((((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * τ) / 2) *
+          ((1 + Complex.exp (-((Real.pi : ℂ) * Complex.I) / 5)) *
+              paper2ThetaAB_c2c1
+                (1 / 2, 1 / 10) (-(1 / 2), -(1 / 10)) τ +
+            (1 + Complex.exp (3 * Real.pi * Complex.I / 5)) *
+              paper2ThetaAB_c2c1
+                (1 / 2, 7 / 10) (-(1 / 2), -(1 / 10)) τ) := by
+  constructor
+  · rw [completedTheta_eq_internal]
+    change QseriesFormalization.Ch10.paper2LatticeTheta (-1 / τ) =
+      ((((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * τ) / 2) *
+        ∑ r : Fin 5, QseriesFormalization.Ch10.paper2ThetaAB_c2c1
+          (1 / 2, -(1 / 10) + (r : ℝ) / 5)
+          (-(1 / 2), -(1 / 10)) τ
+    exact QseriesFormalization.Ch10.paper2LatticeTheta_S hτ
+  · rw [completedTheta_eq_internal]
+    change QseriesFormalization.Ch10.paper2LatticeTheta (-1 / τ) =
+      ((((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * τ) / 2) *
+        ((1 + Complex.exp (-((Real.pi : ℂ) * Complex.I) / 5)) *
+            QseriesFormalization.Ch10.paper2ThetaAB_c2c1
+              (1 / 2, 1 / 10) (-(1 / 2), -(1 / 10)) τ +
+          (1 + Complex.exp (3 * Real.pi * Complex.I / 5)) *
+            QseriesFormalization.Ch10.paper2ThetaAB_c2c1
+              (1 / 2, 7 / 10) (-(1 / 2), -(1 / 10)) τ)
+    exact QseriesFormalization.Ch10.paper2LatticeTheta_S_two_term hτ
+
+theorem exact_differential_image {τ : ℂ} (hτ : 0 < τ.im) :
+    dbar paper2CompletedTheta τ =
+        -(Complex.I / (4 * ((Real.sqrt (10 * τ.im) : ℝ) : ℂ))) *
+          ∑ j ∈ Finset.range 4, (-1 : ℂ) ^ j *
+            paper2ThetaComponent (j : ℤ) τ *
+              (starRingEnd ℂ) (paper2GComponent (j : ℤ) τ) ∧
+    xi1 paper2CompletedTheta τ =
+        -(((Real.sqrt τ.im / (2 * Real.sqrt 10) : ℝ)) : ℂ) *
+          ∑ j ∈ Finset.range 4, (-1 : ℂ) ^ j *
+            (starRingEnd ℂ) (paper2ThetaComponent (j : ℤ) τ) *
+              paper2GComponent (j : ℤ) τ := by
+  constructor
+  · rw [dbar_eq_internal, completedTheta_fun_eq_internal]
+    change QseriesFormalization.Ch10.dbar
+        QseriesFormalization.Ch10.paper2LatticeTheta τ =
+      -(Complex.I / (4 * ((Real.sqrt (10 * τ.im) : ℝ) : ℂ))) *
+        ∑ j ∈ Finset.range 4, (-1 : ℂ) ^ j *
+          QseriesFormalization.Ch10.paper2ThetaComponent (j : ℤ) τ *
+            (starRingEnd ℂ)
+              (QseriesFormalization.Ch10.paper2GComponent (j : ℤ) τ)
+    exact QseriesFormalization.Ch10.paper2_dbar_latticeTheta_exact hτ
+  · rw [xi1_eq_internal, completedTheta_fun_eq_internal]
+    change QseriesFormalization.Ch10.xi1
+        QseriesFormalization.Ch10.paper2LatticeTheta τ =
+      -(((Real.sqrt τ.im / (2 * Real.sqrt 10) : ℝ)) : ℂ) *
+        ∑ j ∈ Finset.range 4, (-1 : ℂ) ^ j *
+          (starRingEnd ℂ)
+              (QseriesFormalization.Ch10.paper2ThetaComponent (j : ℤ) τ) *
+            QseriesFormalization.Ch10.paper2GComponent (j : ℤ) τ
+    exact QseriesFormalization.Ch10.paper2_xi1_latticeTheta_exact hτ
+
+theorem completedTheta_not_harmonic :
+    Delta1 paper2CompletedTheta (2 * Complex.I) ≠ 0 ∧
+    dbar (xi1 paper2CompletedTheta) (2 * Complex.I) ≠ 0 ∧
+    (fun τ => dbar paper2CompletedTheta τ) ≠ 0 ∧
+    xi1 paper2CompletedTheta ≠ 0 := by
+  have hxi : xi1 paper2CompletedTheta =
+      QseriesFormalization.Ch10.xi1
+        QseriesFormalization.Ch10.paper2LatticeTheta :=
+    completedTheta_xi1_fun_eq_internal
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · rw [Delta1_eq_internal, completedTheta_fun_eq_internal]
+    exact QseriesFormalization.Ch10.paper2_delta1_latticeTheta_two_I_ne_zero
+  · rw [dbar_eq_internal, hxi]
+    exact QseriesFormalization.Ch10.paper2_dbar_xi1_latticeTheta_two_I_ne_zero
+  · rw [completedTheta_dbar_fun_eq_internal]
+    exact QseriesFormalization.Ch10.paper2_dbar_latticeTheta_ne_zero
+  · rw [hxi]
+    exact QseriesFormalization.Ch10.paper2_xi1_latticeTheta_ne_zero
+
 end
+
 end PalomarQseriesRowFactorization

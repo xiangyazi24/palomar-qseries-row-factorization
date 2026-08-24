@@ -92,6 +92,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
+      - name: Check Challenge/Public definition drift
+        run: |
+          awk '/BEGIN PUBLIC STATEMENT DEFINITIONS/{flag=1;next}/END PUBLIC STATEMENT DEFINITIONS/{flag=0}flag' Challenge.lean > "$RUNNER_TEMP/challenge.defs"
+          awk '/BEGIN PUBLIC STATEMENT DEFINITIONS/{flag=1;next}/END PUBLIC STATEMENT DEFINITIONS/{flag=0}flag' PalomarQseriesRowFactorization/Public.lean > "$RUNNER_TEMP/public.defs"
+          diff -u "$RUNNER_TEMP/challenge.defs" "$RUNNER_TEMP/public.defs"
       - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
         with:
           build: true
