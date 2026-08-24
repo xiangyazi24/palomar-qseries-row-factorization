@@ -24,7 +24,7 @@ sources:
   - title: "A shifted indefinite theta completion over Q(sqrt(5)): an asymmetric boundary derivative and a row-model factorization"
     authors:
       - "Xiang Huang"
-    type: original-proof
+    type: paper
     location: "paper/paper2.pdf"
     relationship: formalizes
     author_endorsement: participated
@@ -36,7 +36,7 @@ sources:
   - title: "Mock theta functions"
     authors:
       - "Sander Zwegers"
-    type: thesis
+    type: other
     location: "Utrecht University, 2002, Definition 2.1, Lemma 2.8, and Corollary 2.9"
     relationship: formalizes
     author_endorsement: not-contacted
