@@ -6,7 +6,8 @@ project:
   description: >-
     A Lean 4 verification of an explicit rank-two indefinite theta completion
     over Q(sqrt(5)). The registered results cover the coefficientwise row-model
-    factorization; the exact holomorphic-sign-part bridge; a specialization of
+    factorization; the exact holomorphic-sign-part bridge; absolute convergence
+    of the defining completed-theta lattice series; a specialization of
     Zwegers' Lemma 2.8; the weight-one T and S transformations, including the
     five-to-two characteristic reduction; the exact mixed boundary derivative
     and Bruinier--Funke image; and a kernel-checked nonharmonicity witness.
@@ -31,8 +32,8 @@ sources:
     note: >-
       The paper and formalization were developed together. Comparator covers
       the paper's row-model factorization, completed-theta bridge, Lemma 2.8
-      specialization, T and S transformations, exact differential images, and
-      nonharmonicity conclusion.
+      specialization, completed-theta convergence, T and S transformations,
+      exact differential images, and nonharmonicity conclusion.
   - title: "Mock theta functions"
     authors:
       - "Sander Zwegers"
@@ -67,8 +68,9 @@ related_formalizations:
 
 status:
   scope: >-
-    Comparator checks nine Solution declarations: three finite row-model
-    coefficient theorems, the exact completed-theta/sign-part bridge, the
+    Comparator checks ten Solution declarations: three finite row-model
+    coefficient theorems, the exact completed-theta/sign-part bridge, absolute
+    convergence of the completed theta's defining lattice series, the
     specialized Lemma 2.8, the T transformation, the five-term and reduced
     two-term S laws, the exact dbar and xi images, and the explicit
     nonharmonicity/nonvanishing certificate.
@@ -92,6 +94,11 @@ status:
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: "comparator.json"
     - declaration: "PalomarQseriesRowFactorization.exact_completion_bridge"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: "comparator.json"
+    - declaration: "PalomarQseriesRowFactorization.completedTheta_summable"
       file: "Solution.lean"
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
@@ -188,6 +195,11 @@ alignment:
       module: "Challenge"
       status: proved
       note: "Identifies the holomorphic sign part with q^(1/10) B(q)."
+    - source: "Paper, Lean scope subsection: convergence of the defining completed-theta series"
+      lean: "PalomarQseriesRowFactorization.completedTheta_summable"
+      module: "Challenge"
+      status: proved
+      note: "States absolute summability of the exact lattice summand used by paper2CompletedTheta."
     - source: "Zwegers, Lemma 2.8 specialized to the paper's quadratic data"
       lean: "PalomarQseriesRowFactorization.zwegers_lemma28"
       module: "Challenge"

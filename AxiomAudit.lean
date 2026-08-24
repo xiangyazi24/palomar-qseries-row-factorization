@@ -4,6 +4,7 @@ import Solution
 #print axioms PalomarQseriesRowFactorization.coneDiffH_two_mul
 #print axioms PalomarQseriesRowFactorization.coneDiffH_odd
 #print axioms PalomarQseriesRowFactorization.exact_completion_bridge
+#print axioms PalomarQseriesRowFactorization.completedTheta_summable
 #print axioms PalomarQseriesRowFactorization.zwegers_lemma28
 #print axioms PalomarQseriesRowFactorization.completedTheta_add_one
 #print axioms PalomarQseriesRowFactorization.completedTheta_S

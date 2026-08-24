@@ -94,6 +94,15 @@ theorem exact_completion_bridge {τ : ℂ} (hτ : 0 < τ.im) :
       QseriesFormalization.Ch10.paper2LatticeCorrection τ
   exact QseriesFormalization.Ch10.paper2LatticeTheta_eq_bridge hτ
 
+theorem completedTheta_summable {τ : ℂ} (hτ : 0 < τ.im) :
+    Summable (fun n : ℤ × ℤ =>
+      paper2ThetaABTerm (1 / 2, 1 / 10) (1 / 2, -(1 / 10)) τ n) := by
+  change Summable (fun n : ℤ × ℤ =>
+    QseriesFormalization.Ch10.paper2ThetaABTerm
+      (1 / 2, 1 / 10) (1 / 2, -(1 / 10)) τ n)
+  exact QseriesFormalization.Ch10.summable_paper2ThetaABTerm
+    (1 / 2, 1 / 10) (1 / 2, -(1 / 10)) hτ
+
 theorem zwegers_lemma28 {τ : ℂ} (hτ : 0 < τ.im) (α : ℝ × ℝ) :
     paper2H τ α =
       (((Real.sqrt 5 : ℝ) : ℂ)⁻¹ * (Complex.I / (-Complex.I * τ))) *
