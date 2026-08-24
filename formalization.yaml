@@ -158,9 +158,9 @@ review:
     - "OpenAI Codex (Sol max)"
   notes: >-
     The independent Sol max audit passed the mathematical and manuscript
-    alignment after two publication-infrastructure repairs. A separately
-    requested cold Fable review remains pending because the provider's weekly
-    quota is unavailable until 2026-08-28.
+    alignment after two publication-infrastructure repairs. The exact public
+    commit also passes the pinned Comparator under NanoDa and Lean's default
+    kernel.
 
 alignment:
   namespace: "PalomarQseriesRowFactorization"
